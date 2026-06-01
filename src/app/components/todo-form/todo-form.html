@@ -54,7 +54,9 @@
     </div>
 
     <div class="row">
-      <button [disabled]="" class="button-black">Create Task</button>
+      <button type="submit" [disabled]="doLaterForm().invalid()" class="button-black">
+        Create Task
+      </button>
     </div>
   </form>
 </section>

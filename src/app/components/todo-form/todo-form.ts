@@ -37,7 +37,7 @@ export class TodoForm {
       message: 'You forgot to choose a task type',
     });
     pattern(schema.title, /^[A-Za-z]+$/, {
-      message: 'The title field is allergic to numbers and symbols.',
+      message: 'The title field is allergic to numbers and symbols and space.',
     });
     minLength(schema.title, 3, { message: 'Nice try. Your title needs at least 3 characters.' });
     maxLength(schema.title, 200, { message: 'Your task title is longer than the task itself ?' });
@@ -51,13 +51,15 @@ export class TodoForm {
 
   protected onSubmitForm(event: SubmitEvent) {
     event.preventDefault();
+    console.log('firng console');
 
-    if (this.doLaterForm().valid()) {
+    if (this.doLaterForm().invalid()) {
       return;
     }
 
     submit(this.doLaterForm, async () => {
       const formData = this.doLaterForm().value();
+      console.log('userData', formData);
       // const result = this.todoS.addTodo(formData);
     });
   }
