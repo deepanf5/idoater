@@ -52,7 +52,7 @@ export class TodoForm {
   protected onSubmitForm(event: SubmitEvent) {
     event.preventDefault();
 
-    if (this.doLaterForm().valid()) {
+    if (this.doLaterForm().invalid()) {
       return;
     }
 
