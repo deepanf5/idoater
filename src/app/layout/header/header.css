@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  height: 15vh;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1e272e;
+}
+
+.logo {
+  width: 50px;
+}
+
+.button-black {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: black;
+}
+.button-black.button-clear,
+.button-black.button-outline {
+  background-color: transparent;
+  color: #ffffff;
+}
+.button-black.button-clear {
+  border-color: transparent;
+}
+
+.title {
+  color: #ffffff;
+}

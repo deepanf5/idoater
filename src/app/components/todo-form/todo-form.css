@@ -1,0 +1,19 @@
+.taskfield {
+  margin-top: 2rem;
+}
+
+header {
+  height: 60px;
+  background-color: antiquewhite;
+}
+
+.error {
+  font-size: 1.4rem;
+  color: crimson;
+}
+
+.button-black {
+  margin-left: 1rem;
+  background-color: black;
+  border-color: black;
+}

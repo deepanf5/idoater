@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="column">
+      <header>
+        <app-header></app-header>
+      </header>
+    </div>
+  </div>
+
+  <div class="row aside-container">
+    <div class="column column column-20">
+      <aside>
+        <app-aside></app-aside>
+      </aside>
+    </div>
+    <div class="column column-80 router-container">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+  <div class="row column column-100">
+    <footer>
+      <app-footer></app-footer>
+    </footer>
+  </div>
+</div>

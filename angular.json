@@ -25,6 +25,8 @@
               }
             ],
             "styles": [
+              "node_modules/normalize.css/normalize.css",
+              "node_modules/milligram/dist/milligram.min.css",
               "src/styles.css"
             ]
           },

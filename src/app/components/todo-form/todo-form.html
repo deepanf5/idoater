@@ -1,0 +1,60 @@
+<section class="container">
+  <form (submit)="onSubmitForm($event)" novalidate>
+    <div class="row">
+      <div class="column">
+        <!-- Title Field  -->
+        <fieldset class="taskfield">
+          @let title = doLaterForm.title();
+          <label for="titleField">Title</label>
+
+          <input [formField]="doLaterForm.title" type="text" id="titleField" />
+          @if (title.invalid() && (title.dirty() || title.touched())) {
+            @for (error of title.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+      <div class="column">
+        <!-- TaskType Field  -->
+        <fieldset class="taskfield">
+          @let taskType = doLaterForm.taskType();
+          <label for="tasktypeField">Tasktype</label>
+          <select [formField]="doLaterForm.taskType" type="text" id="tasktypeField">
+            @for (task of taskList(); track task) {
+              <option [value]="task">{{ task }}</option>
+            }
+          </select>
+
+          @if (taskType.invalid() && (taskType.dirty() || taskType.touched())) {
+            @for (error of taskType.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <!-- description Field  -->
+        <fieldset>
+          @let desciption = doLaterForm.desciption();
+          <label for="desciptionField">Desciption</label>
+
+          <textarea [formField]="doLaterForm.desciption" type="text" id="desciptionField">
+          </textarea>
+          @if (desciption.invalid() && (desciption.dirty() || desciption.touched())) {
+            @for (error of desciption.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row">
+      <button [disabled]="" class="button-black">Create Task</button>
+    </div>
+  </form>
+</section>
