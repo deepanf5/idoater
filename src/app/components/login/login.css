@@ -1,0 +1,26 @@
+.login {
+  padding: 5rem;
+  width: 100%;
+  margin: 10% auto 2% auto;
+  box-shadow:
+    rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+.title {
+  text-align: center;
+}
+
+.button-black {
+  margin-left: 1rem;
+  background-color: black;
+  border-color: black;
+}
+
+@media screen and (min-width: 1024px) {
+  .login {
+    padding: 5rem;
+    width: 40%;
+    margin: 10% auto;
+  }
+}

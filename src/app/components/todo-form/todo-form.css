@@ -7,11 +7,6 @@ header {
   background-color: antiquewhite;
 }
 
-.error {
-  font-size: 1.4rem;
-  color: crimson;
-}
-
 .button-black {
   margin-left: 1rem;
   background-color: black;

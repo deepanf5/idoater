@@ -5,9 +5,9 @@
     alt="A pocture of Taking notes"
   />
   <div>
-    <h1 class="title">[ ( ( ( DoLater ) ) ) ]</h1>
+    <h1 class="title">[ ( ( ( {{ userDetails()?.userName }} ) ) ) ]</h1>
   </div>
   <div>
-    <button class="button-black">contact</button>
+    <a (click)="logOut()" class="button button-clear">log Out</a>
   </div>
 </header>

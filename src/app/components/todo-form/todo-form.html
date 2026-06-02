@@ -7,7 +7,13 @@
           @let title = doLaterForm.title();
           <label for="titleField">Title</label>
 
-          <input [formField]="doLaterForm.title" type="text" id="titleField" />
+          <input
+            [formField]="doLaterForm.title"
+            type="text"
+            id="titleField"
+            autocomplete="none"
+            autofill="none"
+          />
           @if (title.invalid() && (title.dirty() || title.touched())) {
             @for (error of title.errors(); track error.kind) {
               <p class="error">{{ error.message }}</p>
@@ -20,7 +26,13 @@
         <fieldset class="taskfield">
           @let taskType = doLaterForm.taskType();
           <label for="tasktypeField">Tasktype</label>
-          <select [formField]="doLaterForm.taskType" type="text" id="tasktypeField">
+          <select
+            [formField]="doLaterForm.taskType"
+            type="text"
+            id="tasktypeField"
+            autocomplete="none"
+            autofill="none"
+          >
             @for (task of taskList(); track task) {
               <option [value]="task">{{ task }}</option>
             }
@@ -39,10 +51,16 @@
       <div class="column">
         <!-- description Field  -->
         <fieldset>
-          @let desciption = doLaterForm.desciption();
+          @let desciption = doLaterForm.description();
           <label for="desciptionField">Desciption</label>
 
-          <textarea [formField]="doLaterForm.desciption" type="text" id="desciptionField">
+          <textarea
+            [formField]="doLaterForm.description"
+            type="text"
+            id="desciptionField"
+            autocomplete="none"
+            autofill="none"
+          >
           </textarea>
           @if (desciption.invalid() && (desciption.dirty() || desciption.touched())) {
             @for (error of desciption.errors(); track error.kind) {
@@ -54,7 +72,9 @@
     </div>
 
     <div class="row">
-      <button [disabled]="" class="button-black">Create Task</button>
+      <button [disabled]="this.doLaterForm().invalid()" class="button-black">
+        {{ doLaterForm().submitting() ? 'Submitting....' : 'Create Todo' }}
+      </button>
     </div>
   </form>
 </section>
