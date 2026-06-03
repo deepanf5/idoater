@@ -1,13 +1,9 @@
 <header>
-  <img
-    class="logo"
-    src="https://www.svgrepo.com/show/142693/notes.svg"
-    alt="A pocture of Taking notes"
-  />
+  <img class="logo" src="/logo.svg" alt="A pocture of Taking notes" />
   <div>
-    <h1 class="title">[ ( ( ( {{ userDetails().userName }} ) ) ) ]</h1>
+    <h1 class="title">{{ userDetails().userName }} Bucket List..</h1>
   </div>
   <div>
-    <a (click)="logOut()" class="button button-clear">log Out</a>
+    <a (click)="logOut()" class="button button-clear logOut">log Out</a>
   </div>
 </header>

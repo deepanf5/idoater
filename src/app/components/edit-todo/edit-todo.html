@@ -1,0 +1,97 @@
+<section class="container">
+  <form (submit)="onSubmitForm($event)" novalidate>
+    <div class="row">
+      <div class="column">
+        <!-- Title Field  -->
+        <fieldset class="taskfield">
+          @let title = doLaterForm.title();
+          <label for="titleField">Title</label>
+
+          <input
+            [formField]="doLaterForm.title"
+            type="text"
+            id="titleField"
+            autocomplete="none"
+            autofill="none"
+          />
+          @if (title.invalid() && (title.dirty() || title.touched())) {
+            @for (error of title.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+      <div class="column">
+        <!-- TaskType Field  -->
+        <fieldset class="taskfield">
+          @let taskType = doLaterForm.taskType();
+          <label for="tasktypeField">Tasktype</label>
+          <select
+            [formField]="doLaterForm.taskType"
+            type="text"
+            id="tasktypeField"
+            autocomplete="none"
+            autofill="none"
+          >
+            @for (task of taskList(); track task) {
+              <option [value]="task">{{ task }}</option>
+            }
+          </select>
+
+          @if (taskType.invalid() && (taskType.dirty() || taskType.touched())) {
+            @for (error of taskType.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <!-- description Field  -->
+        <fieldset>
+          @let desciption = doLaterForm.description();
+          <label for="desciptionField">Desciption</label>
+
+          <textarea
+            [formField]="doLaterForm.description"
+            type="text"
+            id="desciptionField"
+            autocomplete="none"
+            autofill="none"
+          >
+          </textarea>
+          @if (desciption.invalid() && (desciption.dirty() || desciption.touched())) {
+            @for (error of desciption.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+    </div>
+
+    <!-- @let completed = doLaterForm.completed(); -->
+    <div class="row">
+      <div class="column column-30">
+        <label for="completedField">Task Status</label>
+
+        <input [formField]="doLaterForm.completed" type="checkbox" id="completedField" />
+        @if (
+          doLaterForm.completed().invalid() &&
+          (doLaterForm.completed().dirty() || doLaterForm.completed().touched())
+        ) {
+          @for (error of doLaterForm.completed().errors(); track error.kind) {
+            <p class="error">{{ error.message }}</p>
+          }
+        }
+      </div>
+    </div>
+
+    <div class="row">
+      <button [disabled]="this.doLaterForm().invalid()" class="button-black">
+        {{ doLaterForm().submitting() ? 'Submitting....' : 'Create Todo' }}
+      </button>
+    </div>
+  </form>
+</section>

@@ -37,6 +37,10 @@ export class Supbase {
     );
   }
 
+  getTodoById(targetId: number): Observable<any> {
+    return from(supabase.from('idolater').select('*').eq('id', targetId).single());
+  }
+
   async createTodo(formData: DoLaterI): Promise<any> {
     const response = await supabase
       .from('idolater')
@@ -54,11 +58,25 @@ export class Supbase {
     return response;
   }
 
-  updateTodo() {
-    // return this.http.put("")
+  async updateTodo(formData: DoLaterI, id: number) {
+    const response = await supabase
+      .from('idolater')
+      .update([
+        {
+          user_id: this.authS.userId() || null,
+          title: formData.title,
+          description: formData.description,
+          completed: formData.completed,
+          task_type: formData.taskType,
+          created_at: formData.createdAt,
+        },
+      ])
+      .eq('id', id)
+      .select();
+    return response;
   }
 
-  deleteTodo() {
-    // return this.http.delete('');
+  deleteTodo(id: number): Observable<any> {
+    return from(supabase.from('idolater').delete().eq('id', id).select());
   }
 }

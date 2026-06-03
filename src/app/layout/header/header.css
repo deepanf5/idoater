@@ -8,14 +8,14 @@ header {
 }
 
 .logo {
-  width: 50px;
+  width: 100px;
 }
 
 .title {
   color: #ffffff;
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
-a {
-  color: floralwhite;
+.logOut {
+  color: floralwhite !important;
 }

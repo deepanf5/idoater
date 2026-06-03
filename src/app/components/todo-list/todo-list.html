@@ -8,8 +8,8 @@
         >
           <h2 class="card-title">{{ todo.title }}</h2>
           <p>{{ todo.description }}</p>
-          <button class="button-small btn-upadte">Update</button>
-          <button class="button-small">Remove</button>
+          <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
+          <button class="button-small" (click)="removeTodo(todo.id)">Remove</button>
         </div>
         <div class="card-two">
           @if (todo.completed) {
