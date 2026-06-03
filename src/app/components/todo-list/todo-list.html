@@ -8,14 +8,24 @@
         >
           <h2 class="card-title">{{ todo.title }}</h2>
           <p>{{ todo.description }}</p>
-          <button class="button-small">Update</button>
+          <button class="button-small btn-upadte">Update</button>
           <button class="button-small">Remove</button>
         </div>
         <div class="card-two">
           @if (todo.completed) {
-            <h2>Completed</h2>
+            <div>
+              <p>Completed</p>
+              <img
+                class="icon"
+                src="/green-checkmark-icon.svg"
+                alt="A picture of green check mark"
+              />
+            </div>
           } @else {
-            <h2>Pending</h2>
+            <div>
+              <p>Pending</p>
+              <img class="icon2" src="/caution-svgrepo-com.svg" alt="A picture of clock" />
+            </div>
           }
         </div>
       </div>
