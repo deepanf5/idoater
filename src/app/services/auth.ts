@@ -3,7 +3,7 @@ import { supabase } from '../app.config';
 import { from, Observable } from 'rxjs';
 import { AuthResponse } from '@supabase/supabase-js';
 
-enum loginStatus {
+export enum loginStatus {
   status = 'SIGNED_IN',
 }
 
@@ -12,7 +12,16 @@ enum loginStatus {
 })
 export class Auth {
   userData = signal<any>({});
-  userId = signal<string | null>(null);
+  userId = signal<string>('');
+
+  constructor() {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === loginStatus.status) {
+        this.userData.set(session?.user.user_metadata);
+        this.userId.set(session?.user.id ?? '');
+      }
+    });
+  }
 
   signUp(email: string, password: string, userName: string): Observable<AuthResponse> {
     const promise = supabase.auth.signUp({
@@ -38,15 +47,4 @@ export class Auth {
   signOut() {
     supabase.auth.signOut();
   }
-
-  setUser() {
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (event === loginStatus.status) {
-        this.userData.set(session?.user.user_metadata);
-        this.userId.set(session?.user.id ?? '');
-      }
-    });
-  }
-
-  getUserDetails() {}
 }

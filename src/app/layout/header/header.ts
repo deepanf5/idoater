@@ -1,6 +1,7 @@
 import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
-import { Auth } from '../../services/auth';
+import { Auth, loginStatus } from '../../services/auth';
 import { Router } from '@angular/router';
+import { supabase } from '../../app.config';
 
 @Component({
   selector: 'app-header',
@@ -11,19 +12,14 @@ import { Router } from '@angular/router';
 export class Header implements OnInit {
   authS = inject(Auth);
   router = inject(Router);
-  userDetails = signal<any>({});
-  auth = inject(Auth);
+  userDetails = this.authS.userData;
 
   constructor() {}
+
+  ngOnInit(): void {}
 
   logOut() {
     this.authS.signOut();
     this.router.navigate(['/login']);
-    this.auth.userData.set({});
-  }
-
-  ngOnInit(): void {
-    this.auth.setUser();
-    this.userDetails = this.authS.userData;
   }
 }

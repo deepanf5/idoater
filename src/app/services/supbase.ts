@@ -1,7 +1,8 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Injector } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { supabase } from '../app.config';
 import { Auth } from './auth';
-import { from } from 'rxjs';
+import { from, Observable, of, switchMap } from 'rxjs';
 
 export interface DoLaterI {
   title: string;
@@ -16,18 +17,32 @@ export interface DoLaterI {
 })
 export class Supbase {
   authS = inject(Auth);
+  private injector = inject(Injector);
 
-  getTodo() {
-    console.log('userId++', this.authS.userId());
-    return from(supabase.from('do_later').select('*').eq('user_id', this.authS.userId()));
+  getTodoList(): Observable<any> {
+    return toObservable(this.authS.userId, { injector: this.injector }).pipe(
+      switchMap(() => {
+        if (!this.authS.userId) {
+          return of([]);
+        }
+
+        return from(
+          supabase
+            .from('idolater')
+            .select('*')
+            .eq('user_id', this.authS.userId())
+            .order('created_at', { ascending: false }),
+        );
+      }),
+    );
   }
 
   async createTodo(formData: DoLaterI): Promise<any> {
     const response = await supabase
-      .from('do_later')
+      .from('idolater')
       .insert([
         {
-          user_id: this.authS.userId(),
+          user_id: this.authS.userId() || null,
           title: formData.title,
           description: formData.description,
           completed: formData.completed,

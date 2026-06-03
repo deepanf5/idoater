@@ -34,7 +34,6 @@ export class Login {
       const formData = this.loginForm().value();
       this.authS.signIn(formData.email, formData.password).subscribe({
         next: (res: AuthResponse) => {
-          console.log(res);
           if (res.data.user) {
             this.router.navigate(['/home']);
           }

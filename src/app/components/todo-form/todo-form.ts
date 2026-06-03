@@ -42,10 +42,10 @@ export class TodoForm {
     });
     minLength(schema.title, 3, { message: 'Nice try. Your title needs at least 3 characters.' });
     maxLength(schema.title, 200, { message: 'Your task title is longer than the task itself ?' });
-    minLength(schema.description, 3, {
+    minLength(schema.description, 100, {
       message: 'This task cries silently for a description',
     });
-    maxLength(schema.description, 250, {
+    maxLength(schema.description, 850, {
       message: 'This task cries silently for a description',
     });
   });

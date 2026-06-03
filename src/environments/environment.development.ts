@@ -6,6 +6,6 @@ export interface Environment {
 
 export const environment: Environment = {
   production: false,
-  supabaseUrl: 'https://wnxwazezfysadtpzuxkb.supabase.co',
-  supabaseAnonKey: 'sb_publishable_A00WTLLttmvYCBHrdCRIkQ_8j5WE_rT',
+  supabaseUrl: 'https://hsixzoouujfogsodrkls.supabase.co',
+  supabaseAnonKey: 'sb_publishable_tnn3owyQYo7_RJbJLtPBaw_rnLW4ORb',
 };
