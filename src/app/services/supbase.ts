@@ -2,7 +2,7 @@ import { inject, Injectable, Injector } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { supabase } from '../app.config';
 import { Auth } from './auth';
-import { from, Observable, of, switchMap } from 'rxjs';
+import { filter, from, Observable, of, switchMap } from 'rxjs';
 
 export interface DoLaterI {
   title: string;
@@ -21,6 +21,7 @@ export class Supbase {
 
   getTodoList(): Observable<any> {
     return toObservable(this.authS.userId, { injector: this.injector }).pipe(
+      filter((userId) => !!userId),
       switchMap(() => {
         if (!this.authS.userId) {
           return of([]);

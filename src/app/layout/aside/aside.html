@@ -3,8 +3,13 @@
     <ul class="nav-list">
       <li class="nav-item"><a [routerLink]="'/home'">Home</a></li>
       <li class="nav-item"><a [routerLink]="'/home/createTodo'">Create Todo</a></li>
-      <li class="nav-item"><a>view Finished Task</a></li>
-      <li class="nav-item"><a>Items 2</a></li>
+      <li class="nav-item"><a [routerLink]="'/home/completedList'">Completed Tasks</a></li>
+      <li class="nav-item">
+        <a [routerLink]="'/home/pendingList'">Pending Tasks </a>
+      </li>
+      <li class="nav-item">
+        <a>Expense Tracker <span>new</span></a>
+      </li>
     </ul>
   </aside>
 </section>

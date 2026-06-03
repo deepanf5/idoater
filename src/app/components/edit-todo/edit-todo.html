@@ -25,7 +25,7 @@
         <!-- TaskType Field  -->
         <fieldset class="taskfield">
           @let taskType = doLaterForm.taskType();
-          <label for="tasktypeField">Tasktype</label>
+          <label for="tasktypeField">TaskType</label>
           <select
             [formField]="doLaterForm.taskType"
             type="text"
@@ -90,7 +90,7 @@
 
     <div class="row">
       <button [disabled]="this.doLaterForm().invalid()" class="button-black">
-        {{ doLaterForm().submitting() ? 'Submitting....' : 'Create Todo' }}
+        {{ doLaterForm().submitting() ? 'Submitting....' : 'Update Todo' }}
       </button>
     </div>
   </form>

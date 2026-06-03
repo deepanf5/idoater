@@ -1,0 +1,32 @@
+<section>
+  <button class="button completedbtn">Pending List</button>
+  <cdk-virtual-scroll-viewport itemSize="50" class="virtual-scrolling">
+    @for (todo of todoList(); track todo) {
+      <div class="card-container">
+        <div class="container card-one">
+          <h2 class="card-title">{{ todo.title }}</h2>
+          <p>{{ todo.description }}</p>
+          <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
+          <button class="button-small button-small" (click)="removeTodo(todo.id)">Remove</button>
+        </div>
+        <div class="card-two">
+          @if (todo.completed) {
+            <div>
+              <p>Completed</p>
+              <img
+                class="icon"
+                src="/green-checkmark-icon.svg"
+                alt="A picture of green check mark"
+              />
+            </div>
+          } @else {
+            <div>
+              <p>Pending</p>
+              <img class="icon2" src="/caution-svgrepo-com.svg" alt="A picture of clock" />
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </cdk-virtual-scroll-viewport>
+</section>

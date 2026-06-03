@@ -9,3 +9,10 @@
   padding-left: 1rem;
   text-transform: capitalize;
 }
+
+span {
+  padding: 0.5rem 1.2rem 0.5rem;
+  font-size: 1.2rem;
+  background-color: #3ea625;
+  color: white;
+}

@@ -6,6 +6,8 @@ import { Login } from './components/login/login';
 import { SignUp } from './components/sign-up/sign-up';
 import { EditTodo } from './components/edit-todo/edit-todo';
 import { idolateResolver } from './resolver/resolver';
+import { Completed } from './components/completed/completed';
+import { PendingList } from './components/pending-list/pending-list';
 
 export const routes: Routes = [
   {
@@ -45,6 +47,16 @@ export const routes: Routes = [
         path: 'createTodo',
         component: TodoForm,
         title: 'todo',
+      },
+      {
+        path: 'completedList',
+        component: Completed,
+        title: 'completed',
+      },
+      {
+        path: 'pendingList',
+        component: PendingList,
+        title: 'PendingList',
       },
     ],
   },
