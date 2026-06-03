@@ -31,7 +31,6 @@ export class PendingList implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log('res', res);
           this.todoList.set(res);
         },
         error: (err: Error) => {

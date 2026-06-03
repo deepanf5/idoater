@@ -11,8 +11,10 @@
 }
 
 span {
+  margin-left: 1rem;
   padding: 0.5rem 1.2rem 0.5rem;
   font-size: 1.2rem;
   background-color: #3ea625;
   color: white;
+  border-radius: 4px;
 }

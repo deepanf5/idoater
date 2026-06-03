@@ -8,6 +8,7 @@ import { EditTodo } from './components/edit-todo/edit-todo';
 import { idolateResolver } from './resolver/resolver';
 import { Completed } from './components/completed/completed';
 import { PendingList } from './components/pending-list/pending-list';
+import { ExpenseTracker } from './components/expense-tracker/expense-tracker';
 
 export const routes: Routes = [
   {
@@ -17,27 +18,27 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: Login,
+    loadComponent: () => import('./components/login/login').then((c) => c.Login),
     title: 'login',
   },
   {
     path: 'signUp',
-    component: SignUp,
+    loadChildren: () => import('./components/sign-up/sign-up').then((c) => c.SignUp),
     title: 'singUp',
   },
   {
     path: 'home',
-    component: Layout,
+    loadComponent: () => import('./layout/layout/layout').then((c) => c.Layout),
     title: 'Home',
     loadChildren: () => [
       {
         path: '',
-        component: TodoList,
+        loadChildren: () => import('./components/todo-list/todo-list').then((c) => c.TodoList),
         title: 'todoList',
       },
       {
         path: 'edit/:id',
-        component: EditTodo,
+        loadChildren: () => import('./components/edit-todo/edit-todo').then((c) => c.EditTodo),
         title: 'editTodo',
         resolve: {
           todo: idolateResolver,
@@ -45,18 +46,25 @@ export const routes: Routes = [
       },
       {
         path: 'createTodo',
-        component: TodoForm,
+        loadChildren: () => import('./components/todo-form/todo-form').then((c) => c.TodoForm),
         title: 'todo',
       },
       {
         path: 'completedList',
-        component: Completed,
+        loadChildren: () => import('./components/completed/completed').then((c) => c.Completed),
         title: 'completed',
       },
       {
         path: 'pendingList',
-        component: PendingList,
+        loadChildren: () =>
+          import('./components/pending-list/pending-list').then((c) => c.PendingList),
         title: 'PendingList',
+      },
+      {
+        path: 'expenseTracker',
+        loadChildren: () =>
+          import('./components/expense-tracker/expense-tracker').then((c) => c.ExpenseTracker),
+        title: 'ExpenseTracker',
       },
     ],
   },
