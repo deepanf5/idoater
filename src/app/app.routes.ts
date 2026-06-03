@@ -23,22 +23,22 @@ export const routes: Routes = [
   },
   {
     path: 'signUp',
-    loadChildren: () => import('./components/sign-up/sign-up').then((c) => c.SignUp),
+    loadComponent: () => import('./components/sign-up/sign-up').then((c) => c.SignUp),
     title: 'singUp',
   },
   {
     path: 'home',
-    loadComponent: () => import('./layout/layout/layout').then((c) => c.Layout),
+    component: Layout,
     title: 'Home',
-    loadChildren: () => [
+    children: [
       {
         path: '',
-        loadChildren: () => import('./components/todo-list/todo-list').then((c) => c.TodoList),
+        loadComponent: () => import('./components/todo-list/todo-list').then((c) => c.TodoList),
         title: 'todoList',
       },
       {
         path: 'edit/:id',
-        loadChildren: () => import('./components/edit-todo/edit-todo').then((c) => c.EditTodo),
+        loadComponent: () => import('./components/edit-todo/edit-todo').then((c) => c.EditTodo),
         title: 'editTodo',
         resolve: {
           todo: idolateResolver,
@@ -46,23 +46,23 @@ export const routes: Routes = [
       },
       {
         path: 'createTodo',
-        loadChildren: () => import('./components/todo-form/todo-form').then((c) => c.TodoForm),
+        loadComponent: () => import('./components/todo-form/todo-form').then((c) => c.TodoForm),
         title: 'todo',
       },
       {
         path: 'completedList',
-        loadChildren: () => import('./components/completed/completed').then((c) => c.Completed),
+        loadComponent: () => import('./components/completed/completed').then((c) => c.Completed),
         title: 'completed',
       },
       {
         path: 'pendingList',
-        loadChildren: () =>
+        loadComponent: () =>
           import('./components/pending-list/pending-list').then((c) => c.PendingList),
         title: 'PendingList',
       },
       {
         path: 'expenseTracker',
-        loadChildren: () =>
+        loadComponent: () =>
           import('./components/expense-tracker/expense-tracker').then((c) => c.ExpenseTracker),
         title: 'ExpenseTracker',
       },

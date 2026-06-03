@@ -20,7 +20,7 @@ export class Login {
   protected readonly loginForm = form(this.mode, (schema) => {
     required(schema.email, { message: 'Eamil is required' });
     email(schema.email, { message: 'Please enter a valid Email address' });
-    required(schema.email, { message: 'Password is required' });
+    required(schema.password, { message: 'Password is required' });
   });
 
   protected onSubmitForm(event: SubmitEvent) {
