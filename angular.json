@@ -25,6 +25,7 @@
               }
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
               "node_modules/normalize.css/normalize.css",
               "node_modules/milligram/dist/milligram.min.css",
               "src/styles.css"
