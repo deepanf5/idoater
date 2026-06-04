@@ -78,10 +78,10 @@
   padding: 1rem;
 }
 
-.noTaskContainer.card-one {
+.nocard-one {
   width: 100%;
 }
-.noTaskContainer.card-two {
+.nocard-two {
   letter-spacing: 0.8px;
   display: flex;
   align-items: center;
@@ -103,4 +103,8 @@
 
 .loadingImage {
   width: 20%;
+}
+
+.noDataImage {
+  width: 70%;
 }

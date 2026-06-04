@@ -75,6 +75,7 @@
 .noTaskContainer {
   margin-top: 5rem;
   display: flex;
+  justify-content: space-around;
   border-radius: 20px;
   background-color: #f1f2f6;
   letter-spacing: 0.8px;
@@ -85,15 +86,18 @@
   padding: 1rem;
 }
 
-.noTaskContainer.card-one {
-  width: 100%;
+.nocard-one {
+  width: 50%;
 }
-.noTaskContainer.card-two {
+.nocard-two {
   letter-spacing: 0.8px;
   display: flex;
   align-items: center;
-  justify-self: center;
-  width: 100%;
+  width: 50%;
+}
+
+.noDataImage {
+  width: 70%;
 }
 
 .displayText {
