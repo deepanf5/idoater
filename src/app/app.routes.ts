@@ -18,12 +18,12 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./components/login/login').then((c) => c.Login),
+    component: Login,
     title: 'login',
   },
   {
     path: 'signUp',
-    loadComponent: () => import('./components/sign-up/sign-up').then((c) => c.SignUp),
+    component: SignUp,
     title: 'singUp',
   },
   {
@@ -33,7 +33,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./components/todo-list/todo-list').then((c) => c.TodoList),
+        component: TodoList,
         title: 'todoList',
       },
       {
@@ -51,13 +51,12 @@ export const routes: Routes = [
       },
       {
         path: 'completedList',
-        loadComponent: () => import('./components/completed/completed').then((c) => c.Completed),
+        component: Completed,
         title: 'completed',
       },
       {
         path: 'pendingList',
-        loadComponent: () =>
-          import('./components/pending-list/pending-list').then((c) => c.PendingList),
+        component: PendingList,
         title: 'PendingList',
       },
       {
