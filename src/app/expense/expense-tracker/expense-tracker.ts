@@ -22,10 +22,11 @@ export interface ExpenseI {
 })
 export class ExpenseTracker implements OnInit {
   private expenseS = inject(Expense);
-  protected expenses = signal<ExpenseI[]>([]);
+  protected expensesList = signal<ExpenseI[]>([]);
   protected total = signal<number>(0);
   protected thisMonth = signal<number>(0);
   private toastr = inject(ToastrService);
+  protected isLoading = signal<boolean>(false);
 
   ngOnInit(): void {
     this.getExpenseList();
@@ -48,11 +49,13 @@ export class ExpenseTracker implements OnInit {
   }
 
   getExpenseList() {
+    this.isLoading.set(true);
     this.expenseS.getExpenseList().subscribe({
       next: (res) => {
+        this.isLoading.set(false);
         if (res.status === 200 && res.success === true) {
-          this.expenses.set([...res.data]);
-          this.total.set(this.expenses().reduce((acc, item) => item.amount + acc, 0));
+          this.expensesList.set([...res.data]);
+          this.total.set(this.expensesList().reduce((acc, item) => item.amount + acc, 0));
           this.currentMonth();
         } else {
           this.showError();
@@ -61,6 +64,7 @@ export class ExpenseTracker implements OnInit {
       error: (err: Error) => {
         console.error(err.message);
         this.showError();
+        this.isLoading.set(false);
       },
     });
   }

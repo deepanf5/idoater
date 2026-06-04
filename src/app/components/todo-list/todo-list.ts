@@ -27,6 +27,7 @@ export class TodoList implements OnInit {
   private subaseS = inject(Supbase);
   private router = inject(Router);
   private toastr = inject(ToastrService);
+  protected isLoading = signal<boolean>(false);
 
   ngOnInit(): void {
     this.getAllTodo();
@@ -39,6 +40,7 @@ export class TodoList implements OnInit {
   removeTodo(id: number) {
     this.subaseS.deleteTodo(id).subscribe({
       next: (res) => {
+        console.log('res', res);
         if (res.status === 200 && res.success) {
           this.showSuccess();
           this.getAllTodo();
@@ -52,6 +54,7 @@ export class TodoList implements OnInit {
   }
 
   getAllTodo() {
+    this.isLoading.set(true);
     this.subaseS
       .getTodoList()
       .pipe(
@@ -62,12 +65,19 @@ export class TodoList implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          if (res.data.length > 1) {
+          if (res.data.length >= 1) {
             this.todoList.set([...res.data]);
+            this.isLoading.set(false);
+          } else if (res.data.length === 0) {
+            this.todoList.set([]);
+            this.isLoading.set(false);
+          } else {
+            this.Error();
           }
         },
         error: (err: Error) => {
           this.Error();
+          this.isLoading.set(false);
         },
       });
   }

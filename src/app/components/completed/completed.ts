@@ -17,6 +17,7 @@ export class Completed implements OnInit {
   protected todoList = signal<Todo[]>([]);
   private supabaseS = inject(Supbase);
   private toastr = inject(ToastrService);
+  protected isLoading = signal<boolean>(false);
 
   ngOnInit(): void {
     this.getCompletedTodo();
@@ -38,6 +39,7 @@ export class Completed implements OnInit {
   }
 
   getCompletedTodo() {
+    this.isLoading.set(true);
     this.supabaseS
       .getTodoList()
       .pipe(
@@ -48,12 +50,18 @@ export class Completed implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          if (res.length > 1) {
+          this.isLoading.set(false);
+          if (res.length >= 1) {
             this.todoList.set(res);
+          } else if (res.length === 0) {
+            this.todoList.set([]);
+          } else {
+            this.Error();
           }
         },
         error: (err: Error) => {
           this.Error();
+          this.isLoading.set(false);
         },
       });
   }

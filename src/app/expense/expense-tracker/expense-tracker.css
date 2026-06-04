@@ -27,3 +27,43 @@
 .virtual-scrolling {
   height: 65vh;
 }
+
+.noExpenseContainer {
+  margin-top: 5rem;
+  display: flex;
+  border-radius: 20px;
+  background-color: #f1f2f6;
+  letter-spacing: 0.8px;
+}
+
+.card {
+  height: 40vh;
+  padding: 1rem;
+}
+
+.card-one {
+  width: 100%;
+}
+.card-two {
+  letter-spacing: 0.8px;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  width: 100%;
+}
+
+.displayText {
+  font-size: 3rem;
+}
+
+.loadingImagecontainer {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.loadingImage {
+  width: 20%;
+}

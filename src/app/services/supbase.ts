@@ -23,7 +23,7 @@ export class Supbase {
     return toObservable(this.authS.userId, { injector: this.injector }).pipe(
       filter((userId) => !!userId),
       switchMap(() => {
-        if (!this.authS.userId) {
+        if (!this.authS.userId()) {
           return of([]);
         }
 
@@ -32,7 +32,7 @@ export class Supbase {
             .from('idolater')
             .select('*')
             .eq('user_id', this.authS.userId())
-            .order('created_at', { ascending: false }),
+            .order('created_at', { ascending: false })
         );
       }),
     );

@@ -18,6 +18,7 @@ export class PendingList implements OnInit {
   private supabaseS = inject(Supbase);
   private router = inject(Router);
   private toastr = inject(ToastrService);
+  protected isLoading = signal<boolean>(false);
 
   ngOnInit(): void {
     this.getPendingTaskList();
@@ -40,6 +41,7 @@ export class PendingList implements OnInit {
   }
 
   getPendingTaskList() {
+    this.isLoading.set(true);
     this.supabaseS
       .getTodoList()
       .pipe(
@@ -50,14 +52,18 @@ export class PendingList implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          if (res.length > 1) {
-            this.todoList.set(res);
+          this.todoList.set([...res]);
+          this.isLoading.set(false);
+          if (res.length >= 1) {
+          } else if (res.length === 0) {
+            this.todoList.set([]);
           } else {
             this.Error();
           }
         },
         error: (err: Error) => {
           this.showError();
+          this.isLoading.set(false);
         },
       });
   }

@@ -1,34 +1,50 @@
-<section>
-  <header>
-    <button class="button headerbtn">Pending List : {{ todoList().length }}</button>
-  </header>
-  <cdk-virtual-scroll-viewport itemSize="50" class="virtual-scrolling">
-    @for (todo of todoList(); track todo) {
-      <div class="card-container">
-        <div class="container card-one">
-          <h2 class="card-title">{{ todo.title }}</h2>
-          <p>{{ todo.description }}</p>
-          <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
-          <button class="button-small button-small" (click)="removeTodo(todo.id)">Remove</button>
+@if (isLoading()) {
+  <div class="loadingImagecontainer">
+    <img class="loadingImage" src="/loading.png" alt="loading image" />
+  </div>
+} @else if (todoList().length > 0) {
+  <section>
+    <header>
+      <button class="button headerbtn">Pending List : {{ todoList().length }}</button>
+    </header>
+
+    <cdk-virtual-scroll-viewport itemSize="50" class="virtual-scrolling">
+      @for (todo of todoList(); track todo) {
+        <div class="card-container">
+          <div class="container card-one">
+            <h2 class="card-title">{{ todo.title }}</h2>
+            <p>{{ todo.description }}</p>
+            <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
+            <button class="button-small button-small" (click)="removeTodo(todo.id)">Remove</button>
+          </div>
+          <div class="card-two">
+            @if (todo.completed) {
+              <div>
+                <p>Completed</p>
+                <img
+                  class="icon"
+                  src="/green-checkmark-icon.svg"
+                  alt="A picture of green check mark"
+                />
+              </div>
+            } @else {
+              <div>
+                <p>Pending</p>
+                <img class="icon2" src="/caution-svgrepo-com.svg" alt="A picture of clock" />
+              </div>
+            }
+          </div>
         </div>
-        <div class="card-two">
-          @if (todo.completed) {
-            <div>
-              <p>Completed</p>
-              <img
-                class="icon"
-                src="/green-checkmark-icon.svg"
-                alt="A picture of green check mark"
-              />
-            </div>
-          } @else {
-            <div>
-              <p>Pending</p>
-              <img class="icon2" src="/caution-svgrepo-com.svg" alt="A picture of clock" />
-            </div>
-          }
-        </div>
-      </div>
-    }
-  </cdk-virtual-scroll-viewport>
-</section>
+      }
+    </cdk-virtual-scroll-viewport>
+  </section>
+} @else {
+  <section class="noTaskContainer">
+    <div class="card card-one">
+      <img src="/logo.svg" alt="logo image of the application" />
+    </div>
+    <div class="card card-two">
+      <h2 class="displayText">No data available</h2>
+    </div>
+  </section>
+}
