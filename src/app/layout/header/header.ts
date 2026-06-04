@@ -20,6 +20,6 @@ export class Header implements OnInit {
 
   logOut() {
     this.authS.signOut();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/sigIn']);
   }
 }

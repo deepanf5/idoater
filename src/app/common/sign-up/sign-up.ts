@@ -10,8 +10,9 @@ import {
   submit,
   maxLength,
 } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthResponse } from '@supabase/supabase-js';
+import { ToastrService } from 'ngx-toastr';
 
 enum userLogin {
   Auth = 'authenticated',
@@ -25,7 +26,7 @@ export interface accountFormI {
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.css',
 })
@@ -38,6 +39,7 @@ export class SignUp {
 
   authS = inject(Auth);
   router = inject(Router);
+  toastr = inject(ToastrService);
 
   protected signUpForm = form(this.model, (schema) => {
     required(schema.userName, { message: 'UserName is required' });
@@ -73,15 +75,26 @@ export class SignUp {
     submit(this.signUpForm, async () => {
       const formData = this.signUpForm().value();
       this.authS.signUp(formData.email, formData.password, formData.userName).subscribe({
-        next: (res: AuthResponse) => {
-          if (res.data.user?.aud === userLogin.Auth) {
-            this.router.navigate(['/home']);
+        next: (res: any) => {
+          if (res.data.user) {
+            this.showSuccess();
+            this.router.navigate(['/sigIn']);
+          } else {
+            this.showError();
           }
         },
         error: (err) => {
           console.error(err);
+          this.showError();
         },
       });
     });
+  }
+
+  showSuccess() {
+    this.toastr.success('SignUp Success');
+  }
+  showError() {
+    this.toastr.error('Error SignUp Falied');
   }
 }

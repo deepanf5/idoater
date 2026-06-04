@@ -14,13 +14,13 @@ import { AddExpense } from './expense/add-expense/add-expense';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'sigIn',
     pathMatch: 'full',
   },
   {
-    path: 'login',
+    path: 'sigIn',
     component: Login,
-    title: 'login',
+    title: 'sigIn',
   },
   {
     path: 'signUp',
