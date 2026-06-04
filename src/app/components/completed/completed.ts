@@ -5,6 +5,7 @@ import { Auth } from '../../services/auth';
 import { filter, map } from 'rxjs';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Todo } from '../todo-list/todo-list';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-completed',
@@ -13,13 +14,30 @@ import { Todo } from '../todo-list/todo-list';
   styleUrl: './completed.css',
 })
 export class Completed implements OnInit {
-  todoList = signal<Todo[]>([]);
-  supabaseS = inject(Supbase);
-  authS = inject(Auth);
-  id = this.authS.userId();
+  protected todoList = signal<Todo[]>([]);
+  private supabaseS = inject(Supbase);
+  private toastr = inject(ToastrService);
 
   ngOnInit(): void {
-    console.log('works');
+    this.getCompletedTodo();
+  }
+
+  removeTodo(id: number) {
+    this.supabaseS.deleteTodo(id).subscribe({
+      next: (res) => {
+        if (res.status === 200 && res.success) {
+          this.showSuccess();
+          this.getCompletedTodo();
+        }
+      },
+      error: (err: Error) => {
+        console.error(err);
+        this.showError();
+      },
+    });
+  }
+
+  getCompletedTodo() {
     this.supabaseS
       .getTodoList()
       .pipe(
@@ -30,22 +48,24 @@ export class Completed implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          this.todoList.set(res);
+          if (res.length > 1) {
+            this.todoList.set(res);
+          }
         },
         error: (err: Error) => {
-          console.error(err.message);
+          this.Error();
         },
       });
   }
 
-  removeTodo(id: number) {
-    this.supabaseS.deleteTodo(id).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err: Error) => {
-        console.error(err);
-      },
-    });
+  showSuccess() {
+    this.toastr.success('Bye-bye! Task removed. Future you thanks you.');
+  }
+  showError() {
+    this.toastr.error('Error, Task removal failed. It fought back.');
+  }
+
+  Error() {
+    this.toastr.error('Oops! Lost data Error');
   }
 }

@@ -12,6 +12,7 @@ import {
 } from '@angular/forms/signals';
 import { Expense } from '../../services/expense';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export interface expenseI {
   category: string;
@@ -62,6 +63,7 @@ export class AddExpense {
 
   private expeneseS = inject(Expense);
   private router = inject(Router);
+  private toastr = inject(ToastrService);
 
   protected expenseForm = form(this.model, (schema) => {
     required(schema.category, {
@@ -97,14 +99,21 @@ export class AddExpense {
       this.expeneseS.addExpense(formData).subscribe({
         next: (res) => {
           if (res.status === 201 && res.success === true) {
-            console.log(res);
+            this.showSuccess();
             this.router.navigate(['home/expenseTracker']);
           }
         },
         error: (err: Error) => {
-          console.error(err.message);
+          this.showError();
         },
       });
     });
+  }
+
+  showSuccess() {
+    this.toastr.success('Success Expense updated. Wallet status refreshed');
+  }
+  showError() {
+    this.toastr.error('Error Expenses refused to show');
   }
 }

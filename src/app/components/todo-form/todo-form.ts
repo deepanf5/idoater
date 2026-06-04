@@ -11,6 +11,7 @@ import {
 } from '@angular/forms/signals';
 import { initialForm } from './form-resetState';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-todo-form',
@@ -30,6 +31,7 @@ export class TodoForm {
     taskType: '',
   });
   private todoS = inject(Supbase);
+  toastr = inject(ToastrService);
 
   protected doLaterForm = form(this.model, (schema) => {
     required(schema.title, { message: 'Blank tasks are scared of commitment. Give it a title.' });
@@ -43,12 +45,12 @@ export class TodoForm {
       message: 'The title field is allergic to numbers and symbols.',
     });
     minLength(schema.title, 3, { message: 'Nice try. Your title needs at least 3 characters.' });
-    maxLength(schema.title, 200, { message: 'Your task title is longer than the task itself ?' });
+    maxLength(schema.title, 60, { message: 'Your task title is longer than the task itself ?' });
     minLength(schema.description, 100, {
-      message: 'This task cries silently for a description',
+      message: 'This task cries silently for more  description',
     });
-    maxLength(schema.description, 850, {
-      message: 'This task cries silently for a description',
+    maxLength(schema.description, 200, {
+      message: 'This task cries silently for less description',
     });
   });
 
@@ -61,11 +63,27 @@ export class TodoForm {
 
     submit(this.doLaterForm, async () => {
       const formData = this.doLaterForm().value();
-      const result = await this.todoS.createTodo(formData);
-      if (result.success) {
-        this.doLaterForm().reset(initialForm);
-        this.router.navigate(['/home']);
+
+      try {
+        const result = await this.todoS.createTodo(formData);
+        console.log(result);
+        if (result.success) {
+          this.showSuccess();
+          this.doLaterForm().reset(initialForm);
+          this.router.navigate(['/home']);
+        } else {
+          this.showError();
+        }
+      } catch (error) {
+        this.showError();
       }
     });
+  }
+
+  showSuccess() {
+    this.toastr.success('Success! Task created. Good luck, brave soul!');
+  }
+  showError() {
+    this.toastr.error('Error, The task refused to cooperate.');
   }
 }

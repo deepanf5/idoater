@@ -4,6 +4,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { catchError, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Todo {
   id: number;
@@ -22,10 +23,11 @@ export interface Todo {
   styleUrl: './todo-list.css',
 })
 export class TodoList implements OnInit {
-  todoList = signal<Todo[]>([]);
-  subaseS = inject(Supbase);
-  router = inject(Router);
-  private supabse = inject(Supbase);
+  protected todoList = signal<Todo[]>([]);
+  private subaseS = inject(Supbase);
+  private router = inject(Router);
+  private toastr = inject(ToastrService);
+
   ngOnInit(): void {
     this.getAllTodo();
   }
@@ -35,12 +37,16 @@ export class TodoList implements OnInit {
   }
 
   removeTodo(id: number) {
-    this.supabse.deleteTodo(id).subscribe({
+    this.subaseS.deleteTodo(id).subscribe({
       next: (res) => {
-        this.getAllTodo();
+        if (res.status === 200 && res.success) {
+          this.showSuccess();
+          this.getAllTodo();
+        }
       },
       error: (err) => {
         console.error(err);
+        this.showError();
       },
     });
   }
@@ -56,12 +62,24 @@ export class TodoList implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log('user list', res);
-          this.todoList.set([...res.data]);
+          if (res.data.length > 1) {
+            this.todoList.set([...res.data]);
+          }
         },
         error: (err: Error) => {
-          console.error(err.message);
+          this.Error();
         },
       });
+  }
+
+  showSuccess() {
+    this.toastr.success('Bye-bye! Task removed. Future you thanks you.');
+  }
+  showError() {
+    this.toastr.error('Error, Task removal failed. It fought back.');
+  }
+
+  Error() {
+    this.toastr.error('Oops! Lost data. Error');
   }
 }

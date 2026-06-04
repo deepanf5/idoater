@@ -43,6 +43,8 @@ export class Login {
           if (res.data.user?.role === User.role) {
             this.showSuccess();
             this.router.navigate(['/home']);
+          } else {
+            this.showError();
           }
         },
         error: (err) => {
@@ -54,9 +56,9 @@ export class Login {
   }
 
   showSuccess() {
-    this.toastr.success('Success', 'Login Sucess');
+    this.toastr.success('Login Success');
   }
   showError() {
-    this.toastr.error('Error', 'Login Falied');
+    this.toastr.error('Error Login Falied');
   }
 }

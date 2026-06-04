@@ -11,6 +11,7 @@ import {
 } from '@angular/forms/signals';
 import { initialForm } from '../todo-form/form-resetState';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-todo',
@@ -33,6 +34,7 @@ export class EditTodo implements OnInit {
   private todoS = inject(Supbase);
   private id = signal<number>(0);
   private router = inject(Router);
+  private toastr = inject(ToastrService);
 
   ngOnInit(): void {
     const formData = this.activRoute.snapshot.data['todo'].data;
@@ -78,11 +80,25 @@ export class EditTodo implements OnInit {
 
     submit(this.doLaterForm, async () => {
       const formData = this.doLaterForm().value();
-      const result = await this.todoS.updateTodo(formData, this.id());
-      if (result.success) {
-        this.doLaterForm().reset(initialForm);
-        this.router.navigate(['/home']);
+      try {
+        const result = await this.todoS.updateTodo(formData, this.id());
+        if (result.success) {
+          this.showSuccess();
+          this.doLaterForm().reset(initialForm);
+          this.router.navigate(['/home']);
+        } else {
+          this.showError();
+        }
+      } catch (error) {
+        this.showError();
       }
     });
+  }
+
+  showSuccess() {
+    this.toastr.success('Success Task updated. Good luck, brave soul!');
+  }
+  showError() {
+    this.toastr.error('Error The task refused to cooperate.');
   }
 }
