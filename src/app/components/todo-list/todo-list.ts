@@ -37,7 +37,6 @@ export class TodoList implements OnInit {
   removeTodo(id: number) {
     this.supabse.deleteTodo(id).subscribe({
       next: (res) => {
-        console.log(res);
         this.getAllTodo();
       },
       error: (err) => {

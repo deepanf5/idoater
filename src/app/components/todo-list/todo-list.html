@@ -1,4 +1,7 @@
 <section>
+  <header class="header">
+    <button class="button completedbtn">Todo List : {{ todoList().length }}</button>
+  </header>
   <cdk-virtual-scroll-viewport itemSize="50" class="virtual-scrolling">
     @for (todo of todoList(); track todo) {
       <div class="card-container">

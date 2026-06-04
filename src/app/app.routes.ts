@@ -61,8 +61,7 @@ export const routes: Routes = [
       },
       {
         path: 'expenseTracker',
-        loadComponent: () =>
-          import('./components/expense-tracker/expense-tracker').then((c) => c.ExpenseTracker),
+        component: ExpenseTracker,
         title: 'ExpenseTracker',
       },
     ],
