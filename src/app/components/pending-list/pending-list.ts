@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Router } from '@angular/router';
 import { Todo } from '../todo-list/todo-list';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pending-list',
@@ -15,12 +16,32 @@ import { Todo } from '../todo-list/todo-list';
 export class PendingList implements OnInit {
   protected todoList = signal<Todo[]>([]);
   private supabaseS = inject(Supbase);
-  private authS = inject(Auth);
-  private id = this.authS.userId();
   private router = inject(Router);
+  private toastr = inject(ToastrService);
+  protected isLoading = signal<boolean>(false);
 
   ngOnInit(): void {
-    console.log('works');
+    this.getPendingTaskList();
+  }
+
+  removeTodo(id: number) {
+    this.supabaseS.deleteTodo(id).subscribe({
+      next: (res) => {
+        if (res.status === 200 && res.success) {
+          this.showSuccess();
+          this.getPendingTaskList();
+        } else {
+          this.showError();
+        }
+      },
+      error: (err: Error) => {
+        this.showError();
+      },
+    });
+  }
+
+  getPendingTaskList() {
+    this.isLoading.set(true);
     this.supabaseS
       .getTodoList()
       .pipe(
@@ -31,26 +52,34 @@ export class PendingList implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          this.todoList.set(res);
+          this.todoList.set([...res]);
+          this.isLoading.set(false);
+          if (res.length >= 1) {
+          } else if (res.length === 0) {
+            this.todoList.set([]);
+          } else {
+            this.Error();
+          }
         },
         error: (err: Error) => {
-          console.error(err.message);
+          this.showError();
+          this.isLoading.set(false);
         },
       });
   }
 
-  removeTodo(id: number) {
-    this.supabaseS.deleteTodo(id).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err: Error) => {
-        console.error(err);
-      },
-    });
-  }
-
   getId(id: number) {
     this.router.navigate(['home/edit', id]);
+  }
+
+  showSuccess() {
+    this.toastr.success('Bye-bye! Task removed. Future you thanks you.');
+  }
+  showError() {
+    this.toastr.error('Error, Task removal failed. It fought back.');
+  }
+
+  Error() {
+    this.toastr.error('Oops! Lost data. Error');
   }
 }

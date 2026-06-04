@@ -5,6 +5,10 @@ header {
   align-items: center;
   padding: 1rem;
   background-color: #1e272e;
+  border-radius: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {

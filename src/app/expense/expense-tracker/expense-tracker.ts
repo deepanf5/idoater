@@ -3,6 +3,7 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Expense } from '../../services/expense';
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 export interface ExpenseI {
   id: number;
@@ -21,9 +22,11 @@ export interface ExpenseI {
 })
 export class ExpenseTracker implements OnInit {
   private expenseS = inject(Expense);
-  expenses = signal<ExpenseI[]>([]);
-  total = signal<number>(0);
-  thisMonth = signal<number>(0);
+  protected expensesList = signal<ExpenseI[]>([]);
+  protected total = signal<number>(0);
+  protected thisMonth = signal<number>(0);
+  private toastr = inject(ToastrService);
+  protected isLoading = signal<boolean>(false);
 
   ngOnInit(): void {
     this.getExpenseList();
@@ -32,8 +35,12 @@ export class ExpenseTracker implements OnInit {
   removeExpense(id: number) {
     this.expenseS.removeExpenseById(id).subscribe({
       next: (res) => {
-        console.log(res);
-        this.getExpenseList();
+        if (res.status === 200 && res.success) {
+          this.expenseRemoved();
+          this.getExpenseList();
+        } else {
+          this.showError();
+        }
       },
       error: (err: Error) => {
         console.log(err.message);
@@ -42,16 +49,22 @@ export class ExpenseTracker implements OnInit {
   }
 
   getExpenseList() {
+    this.isLoading.set(true);
     this.expenseS.getExpenseList().subscribe({
       next: (res) => {
+        this.isLoading.set(false);
         if (res.status === 200 && res.success === true) {
-          this.expenses.set([...res.data]);
-          this.total.set(this.expenses().reduce((acc, item) => item.amount + acc, 0));
+          this.expensesList.set([...res.data]);
+          this.total.set(this.expensesList().reduce((acc, item) => item.amount + acc, 0));
           this.currentMonth();
+        } else {
+          this.showError();
         }
       },
       error: (err: Error) => {
         console.error(err.message);
+        this.showError();
+        this.isLoading.set(false);
       },
     });
   }
@@ -59,11 +72,25 @@ export class ExpenseTracker implements OnInit {
   currentMonth() {
     this.expenseS.getThisMonthExpense().subscribe({
       next: (res) => {
-        this.thisMonth.set([...res.data].reduce((acc, item) => item.amount + acc, 0));
+        if (res.data) {
+          this.thisMonth.set([...res.data].reduce((acc, item) => item.amount + acc, 0));
+        }
       },
       error: (err: Error) => {
         console.log(err);
+        this.showError();
       },
     });
+  }
+
+  showSuccess() {
+    this.toastr.success('Success Expense updated. Wallet status refreshed');
+  }
+
+  expenseRemoved() {
+    this.toastr.success('Success Expense Removed. Wallet status refreshed');
+  }
+  showError() {
+    this.toastr.error('Error Expenses refused to show or update');
   }
 }

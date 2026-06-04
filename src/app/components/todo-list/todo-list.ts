@@ -4,6 +4,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { catchError, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Todo {
   id: number;
@@ -22,10 +23,12 @@ export interface Todo {
   styleUrl: './todo-list.css',
 })
 export class TodoList implements OnInit {
-  todoList = signal<Todo[]>([]);
-  subaseS = inject(Supbase);
-  router = inject(Router);
-  private supabse = inject(Supbase);
+  protected todoList = signal<Todo[]>([]);
+  private subaseS = inject(Supbase);
+  private router = inject(Router);
+  private toastr = inject(ToastrService);
+  protected isLoading = signal<boolean>(false);
+
   ngOnInit(): void {
     this.getAllTodo();
   }
@@ -35,17 +38,23 @@ export class TodoList implements OnInit {
   }
 
   removeTodo(id: number) {
-    this.supabse.deleteTodo(id).subscribe({
+    this.subaseS.deleteTodo(id).subscribe({
       next: (res) => {
-        this.getAllTodo();
+        console.log('res', res);
+        if (res.status === 200 && res.success) {
+          this.showSuccess();
+          this.getAllTodo();
+        }
       },
       error: (err) => {
         console.error(err);
+        this.showError();
       },
     });
   }
 
   getAllTodo() {
+    this.isLoading.set(true);
     this.subaseS
       .getTodoList()
       .pipe(
@@ -56,12 +65,31 @@ export class TodoList implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log('user list', res);
-          this.todoList.set([...res.data]);
+          if (res.data.length >= 1) {
+            this.todoList.set([...res.data]);
+            this.isLoading.set(false);
+          } else if (res.data.length === 0) {
+            this.todoList.set([]);
+            this.isLoading.set(false);
+          } else {
+            this.Error();
+          }
         },
         error: (err: Error) => {
-          console.error(err.message);
+          this.Error();
+          this.isLoading.set(false);
         },
       });
+  }
+
+  showSuccess() {
+    this.toastr.success('Bye-bye! Task removed. Future you thanks you.');
+  }
+  showError() {
+    this.toastr.error('Error, Task removal failed. It fought back.');
+  }
+
+  Error() {
+    this.toastr.error('Oops! Lost data. Error');
   }
 }

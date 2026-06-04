@@ -36,16 +36,16 @@ export class Auth {
     return from(promise);
   }
 
-  signIn(email: string, password: string) {
-    const promise = supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return from(promise);
+  signIn(email: string, password: string): Observable<any> {
+    return from(
+      supabase.auth.signInWithPassword({
+        email,
+        password,
+      }),
+    );
   }
 
   signOut() {
     supabase.auth.signOut();
   }
-
 }
