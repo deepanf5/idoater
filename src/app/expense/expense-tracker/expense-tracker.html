@@ -26,8 +26,10 @@
       </tbody>
     </table>
   </cdk-virtual-scroll-viewport>
-  <div class="">
+  <div>
+    <td class="footer-heading">This Month</td>
+    <td class="footer-heading">{{ thisMonth() | currency: 'INR' }}</td>
     <td class="footer-heading">Total</td>
-    <td class="footer-heading">{{ total | currency: 'INR' }}</td>
+    <td class="footer-heading">{{ total() | currency: 'INR' }}</td>
   </div>
 </section>

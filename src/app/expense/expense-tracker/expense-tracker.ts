@@ -22,7 +22,8 @@ export interface ExpenseI {
 export class ExpenseTracker implements OnInit {
   private expenseS = inject(Expense);
   expenses = signal<ExpenseI[]>([]);
-  total: number = 0;
+  total = signal<number>(0);
+  thisMonth = signal<number>(0);
 
   ngOnInit(): void {
     this.getExpenseList();
@@ -45,11 +46,23 @@ export class ExpenseTracker implements OnInit {
       next: (res) => {
         if (res.status === 200 && res.success === true) {
           this.expenses.set([...res.data]);
-          this.total = this.expenses().reduce((acc, item) => item.amount + acc, 0);
+          this.total.set(this.expenses().reduce((acc, item) => item.amount + acc, 0));
+          this.currentMonth();
         }
       },
       error: (err: Error) => {
         console.error(err.message);
+      },
+    });
+  }
+
+  currentMonth() {
+    this.expenseS.getThisMonthExpense().subscribe({
+      next: (res) => {
+        this.thisMonth.set([...res.data].reduce((acc, item) => item.amount + acc, 0));
+      },
+      error: (err: Error) => {
+        console.log(err);
       },
     });
   }
