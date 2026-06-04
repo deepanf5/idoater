@@ -6,6 +6,4 @@ import { Component } from '@angular/core';
   templateUrl: './expense-tracker.html',
   styleUrl: './expense-tracker.css',
 })
-export class ExpenseTracker {
-
-}
+export class ExpenseTracker {}
