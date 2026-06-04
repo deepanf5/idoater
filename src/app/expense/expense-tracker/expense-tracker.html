@@ -1,0 +1,35 @@
+<section class="container">
+  <button class="button headerbtn">Expense tracker</button>
+  <cdk-virtual-scroll-viewport itemSize="50" class="virtual-scrolling">
+    <table>
+      <thead>
+        <tr>
+          <th>Categories</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (expense of expenses(); track expense.id) {
+          <tr>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.description | titlecase }}</td>
+            <td>{{ expense.created_at | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ expense.amount.toFixed(2) }}</td>
+            <td>
+              <button class="button remove" (click)="removeExpense(expense.id)">Remove</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
+  <div>
+    <td class="footer-heading">This Month</td>
+    <td class="footer-heading">{{ thisMonth() | currency: 'INR' }}</td>
+    <td class="footer-heading">Total</td>
+    <td class="footer-heading">{{ total() | currency: 'INR' }}</td>
+  </div>
+</section>

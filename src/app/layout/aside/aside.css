@@ -1,6 +1,5 @@
 .aside-container {
   height: 75vh;
-  border-right: 1px solid #2d3436;
 }
 
 .nav-item {
@@ -9,4 +8,13 @@
   flex-direction: column;
   padding-left: 1rem;
   text-transform: capitalize;
+}
+
+span {
+  margin-left: 1rem;
+  padding: 0.5rem 1.2rem 0.5rem;
+  font-size: 1.2rem;
+  background-color: #3ea625;
+  color: white;
+  border-radius: 4px;
 }

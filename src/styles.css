@@ -11,5 +11,10 @@ a {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #22c55e !important;
+  border-color: #4b7bec !important;
+}
+
+.error {
+  font-size: 1.4rem;
+  color: crimson;
 }

@@ -71,9 +71,26 @@
       </div>
     </div>
 
+    <!-- @let completed = doLaterForm.completed(); -->
+    <div class="row">
+      <div class="column column-30">
+        <label for="completedField">Task Status</label>
+
+        <input [formField]="doLaterForm.completed" type="checkbox" id="completedField" />
+        @if (
+          doLaterForm.completed().invalid() &&
+          (doLaterForm.completed().dirty() || doLaterForm.completed().touched())
+        ) {
+          @for (error of doLaterForm.completed().errors(); track error.kind) {
+            <p class="error">{{ error.message }}</p>
+          }
+        }
+      </div>
+    </div>
+
     <div class="row">
       <button [disabled]="this.doLaterForm().invalid()" class="button-black">
-        {{ doLaterForm().submitting() ? 'Submitting....' : 'Create Todo' }}
+        {{ doLaterForm().submitting() ? 'Submitting....' : 'Update Todo' }}
       </button>
     </div>
   </form>
