@@ -40,7 +40,7 @@
 }
 
 .virtual-scrolling {
-  height: 75vh;
+  height: 70vh;
 }
 
 .button-small {
@@ -85,10 +85,10 @@
   padding: 1rem;
 }
 
-.card-one {
+.noTaskContainer.card-one {
   width: 100%;
 }
-.card-two {
+.noTaskContainer.card-two {
   letter-spacing: 0.8px;
   display: flex;
   align-items: center;
