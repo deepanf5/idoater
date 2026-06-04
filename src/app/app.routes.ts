@@ -9,6 +9,7 @@ import { Completed } from './components/completed/completed';
 import { PendingList } from './components/pending-list/pending-list';
 import { ExpenseTracker } from './expense/expense-tracker/expense-tracker';
 import { SignUp } from './common/sign-up/sign-up';
+import { AddExpense } from './expense/add-expense/add-expense';
 
 export const routes: Routes = [
   {
@@ -63,6 +64,11 @@ export const routes: Routes = [
         path: 'expenseTracker',
         component: ExpenseTracker,
         title: 'ExpenseTracker',
+      },
+      {
+        path: 'addExpense',
+        component: AddExpense,
+        title: 'addExpense',
       },
     ],
   },

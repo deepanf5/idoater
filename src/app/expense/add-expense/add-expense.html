@@ -1,1 +1,82 @@
-<p>add-expense works!</p>
+<section class="container">
+  <header>
+    <button class="button headerbtn">Add Expense</button>
+  </header>
+  <form (submit)="onSubmitForm($event)" novalidate>
+    <div class="row">
+      <div class="column column-30">
+        <!-- Title Field  -->
+        <fieldset class="taskfield">
+          @let category = expenseForm.category();
+          <label for="categoryField">Category</label>
+          <select
+            [formField]="expenseForm.category"
+            type="text"
+            id="tasktypeField"
+            autocomplete="none"
+            autofill="none"
+          >
+            @for (task of expenseCategory(); track task) {
+              <option [value]="task">{{ task }}</option>
+            }
+          </select>
+
+          @if (category.invalid() && (category.dirty() || category.touched())) {
+            @for (error of category.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+      <div class="column column-30">
+        <!-- Amount Field  -->
+        <fieldset class="taskfield">
+          @let amount = expenseForm.amount();
+          <label for="amountField">Amount</label>
+          <input
+            [formField]="expenseForm.amount"
+            type="number"
+            id="amountField"
+            autocomplete="none"
+            autofill="none"
+          />
+
+          @if (amount.invalid() && (amount.dirty() || amount.touched())) {
+            @for (error of amount.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column column-30">
+        <!-- Description Field  -->
+        <fieldset class="taskfield">
+          @let description = expenseForm.description();
+          <label for="descriptionField">Description</label>
+          <textarea
+            [formField]="expenseForm.description"
+            type="text"
+            id="amountField"
+            autocomplete="none"
+            autofill="none"
+          ></textarea>
+
+          @if (description.invalid() && (description.dirty() || description.touched())) {
+            @for (error of description.errors(); track error.kind) {
+              <p class="error">{{ error.message }}</p>
+            }
+          }
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row bnt-container">
+      <button [disabled]="this.expenseForm().invalid()" class="button-black">
+        {{ expenseForm().submitting() ? 'Submitting....' : 'Create Expense' }}
+      </button>
+    </div>
+  </form>
+</section>
