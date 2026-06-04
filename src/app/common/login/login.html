@@ -1,4 +1,4 @@
-<section class="container login">
+<!-- <section class="container login">
   <form (submit)="onSubmitForm($event)">
     <fieldset>
       <label for="emailField">Email</label>
@@ -45,4 +45,64 @@
     </fieldset>
   </form>
   <div>Don't have an Account <a [routerLink]="'/signUp'">SignUp</a></div>
+</section> -->
+
+<section class="login-container">
+  <div class="row">
+    <div class="column column-70 logInbox-one">
+      <img class="hero-image" src="/logo.svg" alt="hero-image" />
+    </div>
+    <div class="column column-30 logInbox-two">
+      <section class="login">
+        <h2 class="title">Welcome back ! Ready to get things done</h2>
+        <form (submit)="onSubmitForm($event)">
+          <fieldset>
+            <label for="emailField">Email</label>
+            <input
+              [formField]="loginForm.email"
+              type="email"
+              placeholder="enter your Email"
+              id="emailField"
+              autocomplete="none"
+              autofill="none"
+            />
+            @if (
+              loginForm.email().invalid() &&
+              (loginForm.email().dirty() || loginForm.email().touched())
+            ) {
+              @for (error of loginForm.email().errors(); track error.kind) {
+                <p class="error">{{ error.message }}</p>
+              }
+            }
+          </fieldset>
+
+          <fieldset>
+            <label for="passwordField">Password</label>
+            <input
+              [formField]="loginForm.password"
+              type="password"
+              placeholder="Enter your password"
+              id="passwordField"
+              autocomplete="none"
+              autofill="none"
+            />
+            @if (
+              loginForm.password().invalid() &&
+              (loginForm.password().dirty() || loginForm.password().touched())
+            ) {
+              @for (error of loginForm.password().errors(); track error.kind) {
+                <p class="error">{{ error.message }}</p>
+              }
+            }
+          </fieldset>
+          <fieldset>
+            <div class="row">
+              <button type="submit" class="button-black">sign In</button>
+            </div>
+          </fieldset>
+        </form>
+        <div>Don't have an Account <a [routerLink]="'/signUp'">SignUp</a></div>
+      </section>
+    </div>
+  </div>
 </section>
