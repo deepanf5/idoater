@@ -20,7 +20,6 @@ export class PendingList implements OnInit {
   private router = inject(Router);
 
   ngOnInit(): void {
-    console.log('works');
     this.supabaseS
       .getTodoList()
       .pipe(

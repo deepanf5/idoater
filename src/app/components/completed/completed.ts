@@ -19,7 +19,6 @@ export class Completed implements OnInit {
   id = this.authS.userId();
 
   ngOnInit(): void {
-    console.log('works');
     this.supabaseS
       .getTodoList()
       .pipe(

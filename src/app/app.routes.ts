@@ -47,7 +47,7 @@ export const routes: Routes = [
       },
       {
         path: 'createTodo',
-        loadComponent: () => import('./components/todo-form/todo-form').then((c) => c.TodoForm),
+        component: TodoForm,
         title: 'todo',
       },
       {

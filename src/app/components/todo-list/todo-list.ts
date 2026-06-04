@@ -56,7 +56,6 @@ export class TodoList implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log('user list', res);
           this.todoList.set([...res.data]);
         },
         error: (err: Error) => {
