@@ -40,12 +40,11 @@ export class Login {
       const formData = this.loginForm().value();
       this.authS.signIn(formData.email, formData.password).subscribe({
         next: (res: AuthResponse) => {
-          console.log(res);
           if (res.data.user?.role === User.role) {
             this.showSuccess();
             this.router.navigate(['/home']);
           } else {
-            this.showError();
+            this.error(res.error?.message ?? 'An unknown error occurred');
           }
         },
         error: (err) => {
@@ -61,5 +60,9 @@ export class Login {
   }
   showError() {
     this.toastr.error('Error Login Falied');
+  }
+
+  error(error: string) {
+    this.toastr.error(error);
   }
 }

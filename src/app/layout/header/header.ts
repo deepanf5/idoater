@@ -2,6 +2,7 @@ import { Component, computed, effect, inject, OnInit, signal } from '@angular/co
 import { Auth, loginStatus } from '../../services/auth';
 import { Router } from '@angular/router';
 import { supabase } from '../../app.config';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ export class Header implements OnInit {
   authS = inject(Auth);
   router = inject(Router);
   userDetails = this.authS.userData;
+  private toastr = inject(ToastrService);
 
   constructor() {}
 
@@ -21,5 +23,10 @@ export class Header implements OnInit {
   logOut() {
     this.authS.signOut();
     this.router.navigate(['/sigIn']);
+    this.showSuccess();
+  }
+
+  showSuccess() {
+    this.toastr.success('See you later! Your tasks will wait… impatiently.');
   }
 }

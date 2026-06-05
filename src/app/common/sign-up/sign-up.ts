@@ -76,6 +76,7 @@ export class SignUp {
       const formData = this.signUpForm().value();
       this.authS.signUp(formData.email, formData.password, formData.userName).subscribe({
         next: (res: any) => {
+          console.log(res);
           if (res.data.user) {
             this.showSuccess();
             this.router.navigate(['/sigIn']);
