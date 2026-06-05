@@ -133,7 +133,9 @@
         </fieldset>
         <fieldset>
           <div class="row">
-            <button type="submit" class="button-black">Sign Up</button>
+            <button [disabled]="signUpForm().invalid()" type="submit" class="button-black">
+              {{ signUpForm().submitting() ? 'Creating Account..' : 'Sign Up' }}
+            </button>
           </div>
         </fieldset>
         <div>Already have an Account ? <a [routerLink]="'/sigIn'"> Sign In</a></div>
