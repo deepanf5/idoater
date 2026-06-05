@@ -1,19 +1,8 @@
-<!-- <section class="container">
-  <div>
-    <div class="gif-container">
-      <h1 class="title">Page Not Found</h1>
-      <h2 class="subtitle">Hmm… Either you mistyped the URL, or this page doesn’t exis</h2>
-      <div class="btn-container">
-    </div>
-</div>
-</div>
-</section> -->
-
 <section class="container">
   <div class="content">
     <h1 class="title">Page Not Found</h1>
-    <h2 class="subtitle">Hmm… Either you mistyped the URL, or this page doesn’t exis</h2>
-    <button class="button button-black" [routerLink]="['/home']">go to Home</button>
+    <h2 class="subtitle">Hmm… Either you mistyped the URL, or this page doesn’t exist</h2>
+    <button class="button button-black" (click)="goTo()">go to Home</button>
     <img class="gif" src="pageNotFound.gif" alt="funny gif" />
   </div>
 </section>
