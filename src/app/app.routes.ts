@@ -10,6 +10,7 @@ import { PendingList } from './components/pending-list/pending-list';
 import { ExpenseTracker } from './expense/expense-tracker/expense-tracker';
 import { SignUp } from './common/sign-up/sign-up';
 import { AddExpense } from './expense/add-expense/add-expense';
+import { PageNotFound } from './common/page-not-found/page-not-found';
 
 export const routes: Routes = [
   {
@@ -71,5 +72,9 @@ export const routes: Routes = [
         title: 'addExpense',
       },
     ],
+  },
+  {
+    path: '**',
+    component: PageNotFound,
   },
 ];

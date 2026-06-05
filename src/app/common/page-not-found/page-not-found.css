@@ -1,0 +1,43 @@
+.container {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  margin-top: 2rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin: 4rem;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  letter-spacing: 1.5px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.gif {
+  margin-top: 2rem;
+  width: 100vw;
+  height: 60vh;
+  object-fit: cover;
+  align-self: 1;
+}
+
+.button-black {
+  background-color: black;
+  border-color: black;
+}
+
+@media screen and (min-width: 1024px) {
+  .title {
+    font-size: 4rem;
+  }
+  .subtitle {
+    font-size: 2rem;
+  }
+}
