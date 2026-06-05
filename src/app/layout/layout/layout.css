@@ -1,4 +1,23 @@
 .footer {
   margin-top: 5rem;
-  width: 100vw;
+  width: 100%;
+}
+
+.aside {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .row {
+    display: flex;
+    align-items: start;
+    width: 100%;
+  }
 }

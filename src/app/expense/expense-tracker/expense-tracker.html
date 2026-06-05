@@ -3,8 +3,8 @@
     <img class="loadingImage" src="/loading.png" alt="loading image" />
   </div>
 } @else if (expensesList().length > 0) {
-  <section class="container">
-    <button class="button headerbtn">Expense tracker</button>
+  <section>
+    <header class="header"><button class="button headerbtn">Expense tracker</button></header>
 
     <cdk-virtual-scroll-viewport itemSize="50" class="virtual-scrolling">
       <table>

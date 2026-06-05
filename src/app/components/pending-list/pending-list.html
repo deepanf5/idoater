@@ -4,7 +4,7 @@
   </div>
 } @else if (todoList().length > 0) {
   <section>
-    <header>
+    <header class="header">
       <button class="button headerbtn">Pending List : {{ todoList().length }}</button>
     </header>
 
@@ -13,9 +13,13 @@
         <div class="card-container">
           <div class="container card-one">
             <h2 class="card-title">{{ todo.title }}</h2>
-            <p>{{ todo.description }}</p>
-            <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
-            <button class="button-small button-small" (click)="removeTodo(todo.id)">Remove</button>
+            <p class="description">{{ todo.description }}</p>
+            <div class="btn-container">
+              <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
+              <button class="button-small button-small" (click)="removeTodo(todo.id)">
+                Remove
+              </button>
+            </div>
           </div>
           <div class="card-two">
             @if (todo.completed) {

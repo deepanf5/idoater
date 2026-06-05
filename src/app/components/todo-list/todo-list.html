@@ -16,9 +16,11 @@
             [ngClass]="{ complete: todo.completed, pending: !todo.completed }"
           >
             <h2 class="card-title">{{ todo.title }}</h2>
-            <p>{{ todo.description }}</p>
-            <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
-            <button class="button-small" (click)="removeTodo(todo.id)">Remove</button>
+            <p class="description">{{ todo.description }}</p>
+            <div class="btn-container">
+              <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
+              <button class="button-small" (click)="removeTodo(todo.id)">Remove</button>
+            </div>
           </div>
           <div class="card-two">
             @if (todo.completed) {

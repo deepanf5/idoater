@@ -71,3 +71,15 @@
 .noDataImage {
   width: 70%;
 }
+
+.header {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    text-align: left;
+    margin-top: 0;
+  }
+}

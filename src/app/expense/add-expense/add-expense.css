@@ -1,5 +1,5 @@
 .button-black {
-  margin-left: 1rem;
+  margin-left: 0;
   background-color: black;
   border-color: black;
 }
@@ -17,4 +17,19 @@ form {
   border: 1px solid #3ea625;
   background-color: #3ea625;
   border-color: #3ea625;
+}
+
+.header {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    text-align: left;
+    margin-top: 0;
+  }
+  .button-black {
+    margin-left: 1rem;
+  }
 }

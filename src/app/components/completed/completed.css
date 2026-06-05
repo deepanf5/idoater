@@ -5,6 +5,7 @@
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
 }
 
@@ -12,7 +13,7 @@
   padding: 2rem;
   background-color: #f1f2f6;
   border-radius: 20px;
-  width: 70%;
+  width: 100%;
   margin-right: 1rem;
 }
 
@@ -20,7 +21,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30%;
+  width: 100%;
   border-radius: 20px;
   text-align: center;
 }
@@ -28,6 +29,7 @@
 .card-title {
   font-size: 2rem;
   text-transform: capitalize;
+  text-align: center;
 }
 
 .icon {
@@ -107,4 +109,58 @@
 
 .noDataImage {
   width: 70%;
+}
+
+.header {
+  margin-top: 2rem;
+}
+
+.btn-container,
+.description,
+.header {
+  text-align: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1024px) {
+  .card-container {
+    width: 100%;
+    margin: 1rem;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .card-one {
+    padding: 2rem;
+    background-color: #f1f2f6;
+    border-radius: 20px;
+    width: 70%;
+    margin-right: 1rem;
+  }
+
+  .card-two {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    border-radius: 20px;
+    text-align: center;
+  }
+  .card-title {
+    text-align: center;
+  }
+
+  .btn-container,
+  .description,
+  .header,
+  .card-title {
+    text-align: left;
+    justify-content: left;
+  }
+  .header {
+    margin-top: 0;
+  }
 }
