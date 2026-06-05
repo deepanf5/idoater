@@ -52,7 +52,8 @@ export class SignUp {
       const password = value ? value.toString() : '';
       if (!password) return null;
 
-      const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+      const pattern =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=\-\[\]{}|;:',.<>\/?_]).{8,}$/;
 
       if (!pattern.test(password)) {
         return {
