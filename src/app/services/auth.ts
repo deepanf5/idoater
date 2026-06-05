@@ -19,6 +19,9 @@ export class Auth {
       if (event === loginStatus.status) {
         this.userData.set(session?.user.user_metadata);
         this.userId.set(session?.user.id ?? '');
+      } else {
+        this.userData.set({});
+        this.userId.set('');
       }
     });
   }
