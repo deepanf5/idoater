@@ -79,7 +79,7 @@ export class SignUp {
           console.log(res);
           if (res.data.user) {
             this.showSuccess();
-            this.router.navigate(['/sigIn']);
+            this.router.navigate(['/signIn']);
           } else {
             this.showError();
           }

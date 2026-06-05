@@ -22,7 +22,7 @@ export class Header implements OnInit {
 
   logOut() {
     this.authS.signOut();
-    this.router.navigate(['/sigIn']);
+    this.router.navigate(['/signIn']);
     this.showSuccess();
   }
 

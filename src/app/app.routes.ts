@@ -15,11 +15,11 @@ import { PageNotFound } from './common/page-not-found/page-not-found';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'sigIn',
+    redirectTo: 'signIn',
     pathMatch: 'full',
   },
   {
-    path: 'sigIn',
+    path: 'signIn',
     component: Login,
     title: 'sigIn',
   },

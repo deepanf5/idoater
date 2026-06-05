@@ -97,7 +97,9 @@
           </fieldset>
           <fieldset>
             <div class="row">
-              <button type="submit" class="button-black">sign In</button>
+              <button [disabled]="loginForm().invalid()" type="submit" class="button-black">
+                {{ loginForm().submitting() ? 'Signing In...' : 'Sign In' }}
+              </button>
             </div>
           </fieldset>
         </form>
