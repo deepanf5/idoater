@@ -56,10 +56,10 @@ export class Login {
   }
 
   showSuccess() {
-    this.toastr.success('Login Success');
+    this.toastr.success('Sign In Success, Time to set things Right');
   }
   showError() {
-    this.toastr.error('Error Login Falied');
+    this.toastr.error('Sign In Falied, Please try again with more confidence');
   }
 
   error(error: string) {
