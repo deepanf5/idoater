@@ -92,9 +92,9 @@ export class SignUp {
   }
 
   showSuccess() {
-    this.toastr.success('SignUp Success');
+    this.toastr.success('Welcome! Let’s turn “I’ll do it later” into “done');
   }
   showError() {
-    this.toastr.error('Error SignUp Falied');
+    this.toastr.error('Sign up failed. Please try again later');
   }
 }
