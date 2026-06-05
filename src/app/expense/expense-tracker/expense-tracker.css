@@ -28,28 +28,9 @@
   height: 65vh;
 }
 
-.noExpenseContainer {
-  margin-top: 5rem;
-  display: flex;
-  border-radius: 20px;
-  background-color: #f1f2f6;
-  letter-spacing: 0.8px;
-}
-
 .card {
   height: 40vh;
   padding: 1rem;
-}
-
-.nocard-one {
-  width: 100%;
-}
-.nocard-two {
-  letter-spacing: 0.8px;
-  display: flex;
-  align-items: center;
-  justify-self: center;
-  width: 100%;
 }
 
 .displayText {
@@ -69,7 +50,8 @@
 }
 
 .noDataImage {
-  width: 70%;
+  width: 100%;
+  text-align: center;
 }
 
 .header {
@@ -77,9 +59,57 @@
   margin-top: 2rem;
 }
 
+.noExpenseContainer {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 20px;
+  background-color: #f1f2f6;
+  letter-spacing: 0.8px;
+}
+
+.card {
+  height: 2%;
+  padding: 1rem;
+}
+
+.noDataCard-one {
+  width: 100%;
+  text-align: center;
+}
+.noDataCard-two {
+  letter-spacing: 0.8px;
+  width: 100%;
+}
+
+.noDataImage {
+  width: 50%;
+}
+
+.displayText {
+  margin-top: 2rem;
+  font-size: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.4px;
+}
+
 @media screen and (min-width: 1024px) {
   .header {
     text-align: left;
     margin-top: 0;
+  }
+
+  /* no data style */
+  .displayText {
+    font-size: 3rem;
+    margin-top: 12rem;
+  }
+  .noDataImage {
+    width: 70%;
+  }
+  .noExpenseContainer {
+    flex-direction: row;
   }
 }

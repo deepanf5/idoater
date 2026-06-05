@@ -81,9 +81,10 @@
   justify-content: center;
 }
 
-.noTaskContainer {
+.noDataTaskContainer {
   margin-top: 5rem;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   border-radius: 20px;
   background-color: #f1f2f6;
@@ -91,26 +92,29 @@
 }
 
 .card {
-  height: 40vh;
+  height: 2%;
   padding: 1rem;
 }
 
-.nocard-one {
-  width: 50%;
+.noDataCard-one {
+  width: 100%;
+  text-align: center;
 }
-.nocard-two {
+.noDataCard-two {
   letter-spacing: 0.8px;
-  display: flex;
-  align-items: center;
-  width: 50%;
+  text-align: center;
+  width: 100%;
 }
 
 .noDataImage {
-  width: 70%;
+  width: 50%;
 }
 
 .displayText {
-  font-size: 3rem;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.4px;
 }
 
 .loadingImagecontainer {
@@ -160,6 +164,12 @@
   .virtual-scrolling {
     height: 70vh;
   }
+
+  .card {
+    height: 10%;
+    padding: 1rem;
+  }
+
   .card-title {
     text-align: left;
   }
@@ -167,5 +177,15 @@
   .description {
     text-align: left;
     justify-content: left;
+  }
+  .displayText {
+    font-size: 3rem;
+    margin-top: 12rem;
+  }
+  .noDataImage {
+    width: 70%;
+  }
+  .noDataTaskContainer {
+    flex-direction: row;
   }
 }
