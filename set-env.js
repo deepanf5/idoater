@@ -4,7 +4,7 @@ const path = require('path');
 const dirPath = path.join(__dirname, './src/environments');
 const targetPath = path.join(dirPath, 'environment.ts');
 
-if (fs.existsSync(dirPath)) {
+if (!fs.existsSync(dirPath)) {
   console.log(`Directory ${dirPath} does not exist. Creating it...`);
   fs.mkdirSync(dirPath, { recursive: true });
 }
