@@ -49,6 +49,6 @@ export class Auth {
   }
 
   signOut() {
-    supabase.auth.signOut();
+    return from(supabase.auth.signOut());
   }
 }

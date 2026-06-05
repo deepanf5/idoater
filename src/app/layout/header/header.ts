@@ -21,12 +21,23 @@ export class Header implements OnInit {
   ngOnInit(): void {}
 
   logOut() {
-    this.authS.signOut();
-    this.router.navigate(['/signIn']);
-    this.showSuccess();
+    this.authS.signOut().subscribe({
+      next: (res) => {
+        if (!res.error) {
+          this.router.navigate(['/signIn']);
+          this.showSuccess();
+        }
+      },
+      error: () => {
+        this.showError();
+      },
+    });
   }
 
   showSuccess() {
     this.toastr.success('See you later! Your tasks will wait… impatiently.');
+  }
+  showError() {
+    this.toastr.error('Logout failed. The app is’t ready to let you go ');
   }
 }
