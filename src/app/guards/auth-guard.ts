@@ -2,7 +2,8 @@ import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 import { Auth } from '../services/auth';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = async (route, state) => {
   const auth = inject(Auth);
-  return auth.userData().sub || false;
+  const user = await auth.getUser();
+  return user.data.user?.id ? true : false;
 };

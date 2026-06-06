@@ -24,6 +24,8 @@ export class Login {
   authS = inject(Auth);
   router = inject(Router);
   toastr = inject(ToastrService);
+  protected isPasswordHidden = signal(true);
+
   protected readonly loginForm = form(this.mode, (schema) => {
     required(schema.email, { message: 'Eamil is required' });
     email(schema.email, { message: 'Please enter a valid Email address' });
@@ -54,6 +56,10 @@ export class Login {
         },
       });
     });
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordHidden.set(!this.isPasswordHidden());
   }
 
   showSuccess() {
