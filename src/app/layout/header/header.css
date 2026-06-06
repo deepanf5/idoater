@@ -17,16 +17,19 @@ header {
 
 .title {
   color: #ffffff;
-  font-size: 2rem;
-}
-
-@media screen and (min-width: 102px) {
-  .title {
-    color: #ffffff;
-    font-size: 4rem;
-  }
+  font-size: 1rem;
 }
 
 .logOut {
   color: floralwhite !important;
+}
+
+@media screen and (min-width: 1024px) {
+  .title {
+    color: #ffffff;
+    font-size: 4rem;
+  }
+  .logo {
+    width: 100px;
+  }
 }
