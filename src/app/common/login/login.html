@@ -1,7 +1,14 @@
 <section class="login-container">
   <div class="row">
     <div class="column column-70 logInbox-one">
-      <img class="hero-image" priority ngSrc="/logo.svg" alt="hero-image" />
+      <img
+        class="hero-image"
+        fetchpriority="high"
+        loading="eager"
+        decoding="sync"
+        src="/logo.svg"
+        alt="hero-image"
+      />
     </div>
     <div class="column column-30 logInbox-two">
       <section class="login">

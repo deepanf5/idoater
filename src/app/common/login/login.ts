@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Auth } from '../../services/auth';
 import { Component, inject, signal } from '@angular/core';
 import { email, form, FormField, required, submit } from '@angular/forms/signals';
@@ -12,7 +11,7 @@ enum User {
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink, FormField, NgOptimizedImage],
+  imports: [RouterLink, FormField],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

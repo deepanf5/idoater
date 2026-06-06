@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Auth } from './../../services/auth';
 import { Component, inject, signal } from '@angular/core';
 import {
@@ -27,7 +26,7 @@ export interface accountFormI {
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormField, RouterLink, NgOptimizedImage],
+  imports: [FormField, RouterLink],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.css',
 })
