@@ -1,17 +1,53 @@
 <section class="aside-container">
   <aside>
     <ul class="nav-list">
-      <li class="nav-item"><a [routerLink]="'/home'">Home</a></li>
-      <li class="nav-item"><a [routerLink]="'/home/createTodo'">Create Todo</a></li>
-      <li class="nav-item"><a [routerLink]="'/home/completedList'">Completed Tasks</a></li>
       <li class="nav-item">
-        <a [routerLink]="'/home/pendingList'">Pending Tasks </a>
+        <a
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="'/home'"
+          >Home</a
+        >
       </li>
       <li class="nav-item">
-        <a [routerLink]="'/home/expenseTracker'">Expense Tracker <span>new</span></a>
+        <a
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="'/home/createTodo'"
+          >Create Todo</a
+        >
       </li>
       <li class="nav-item">
-        <a [routerLink]="'/home/addExpense'">Add Expense <span>new</span></a>
+        <a
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="'/home/completedList'"
+          >Completed Tasks</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="'/home/pendingList'"
+          >Pending Tasks
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="'/home/expenseTracker'"
+          >Expense Tracker <span>new</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLink]="'/home/addExpense'"
+          >Add Expense <span>new</span></a
+        >
       </li>
     </ul>
   </aside>
