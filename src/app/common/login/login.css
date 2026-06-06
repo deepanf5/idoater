@@ -39,7 +39,7 @@
     margin: 15% auto;
   }
   .login {
-    padding: 10rem;
+    padding: 5rem 5rem 0 5rem;
     /* box-shadow: rgba(12, 12, 12, 0.192) 0px 8px 24px; */
   }
   .login-container {
@@ -54,13 +54,15 @@
     text-align: left;
     display: flex;
     align-items: center;
-    /* padding: rem; */
   }
 
   .logInbox-two {
     width: 45%;
-    padding-top: 0;
+    padding: 0;
     background-color: #f1f2f6;
     margin: 0;
+  }
+  .button-black {
+    margin-left: 1rem;
   }
 }
