@@ -12,6 +12,7 @@ import { SignUp } from './common/sign-up/sign-up';
 import { AddExpense } from './expense/add-expense/add-expense';
 import { PageNotFound } from './common/page-not-found/page-not-found';
 import { authGuard } from './guards/auth-guard';
+import { unAuthGuard } from './guards/un-auth-guard';
 
 export const routes: Routes = [
   {
@@ -23,11 +24,13 @@ export const routes: Routes = [
     path: 'signIn',
     component: Login,
     title: 'sigIn',
+    canActivate: [unAuthGuard],
   },
   {
     path: 'signUp',
     component: SignUp,
     title: 'singUp',
+    canActivate: [unAuthGuard],
   },
   {
     path: 'home',
@@ -49,37 +52,31 @@ export const routes: Routes = [
         resolve: {
           todo: idolateResolver,
         },
-        canActivate: [authGuard],
       },
       {
         path: 'createTodo',
         loadComponent: () => import('./components/todo-form/todo-form').then((c) => c.TodoForm),
         title: 'todo',
-        canActivate: [authGuard],
       },
       {
         path: 'completedList',
         component: Completed,
         title: 'completed',
-        canActivate: [authGuard],
       },
       {
         path: 'pendingList',
         component: PendingList,
         title: 'PendingList',
-        canActivate: [authGuard],
       },
       {
         path: 'expenseTracker',
         component: ExpenseTracker,
         title: 'ExpenseTracker',
-        canActivate: [authGuard],
       },
       {
         path: 'addExpense',
         component: AddExpense,
         title: 'addExpense',
-        canActivate: [authGuard],
       },
     ],
   },
