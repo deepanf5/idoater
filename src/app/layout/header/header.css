@@ -1,23 +1,21 @@
 header {
   width: 100%;
   display: flex;
-  height: 15vh;
+  height: 14vh;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   background-color: #1e272e;
   border-radius: 20px;
-  position: sticky;
   top: 0;
   z-index: 100;
 }
 
 .logo {
   width: 100px;
-  padding: 1rem;
 }
 
 .title {
+  margin-top: 1.5rem;
   color: #ffffff;
   font-size: 3rem;
 }
