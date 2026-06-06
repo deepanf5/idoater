@@ -52,7 +52,7 @@ export class SignUp {
     minLength(schema.password, 8, { message: 'Password must be 8 char' });
     debounce(schema.password, 300);
     validate(schema.password, ({ value }) => {
-      const password = value() ? value().toString() : '';
+      const password = value() ? value() : '';
       if (!password)
         return {
           kind: 'no_password',
