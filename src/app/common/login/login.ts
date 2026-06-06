@@ -26,11 +26,7 @@ export class Login {
   protected isPasswordHidden = signal(true);
   showForgotPassword = signal(false);
 
-  constructor() {
-    effect(() => {
-      console.log(this.showForgotPassword());
-    });
-  }
+  constructor() {}
 
   protected readonly loginForm = form(this.mode, (schema) => {
     required(schema.email, { message: 'Email required. No shortcuts' });

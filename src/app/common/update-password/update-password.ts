@@ -1,4 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { email, form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { Auth } from '../../services/auth';
 import { ToastrService } from 'ngx-toastr';
@@ -14,16 +15,27 @@ export interface UpdatePasswordI {
   templateUrl: './update-password.html',
   styleUrl: './update-password.css',
 })
-export class UpdatePassword {
+export class UpdatePassword implements OnInit {
   private model = signal<UpdatePasswordI>({
     password: '',
     confirmpassword: '',
   });
 
+  private activeRoute = inject(ActivatedRoute);
   protected isPasswordHidden = signal(true);
   protected isConfirmHidden = signal(true);
   private authS = inject(Auth);
   private toastr = inject(ToastrService);
+  private router = inject(Router);
+
+  ngOnInit(): void {
+    this.activeRoute.queryParams.subscribe((param) => {
+      const token = param['access_token'];
+      if (!token) {
+        this.router.navigate(['/sign-in']);
+      }
+    });
+  }
 
   protected readonly passwordForm = form(this.model, (schema) => {
     required(schema.password, { message: 'Type your password or no magic for you' });
