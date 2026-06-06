@@ -24,3 +24,9 @@ select:focus {
 body {
   font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
+
+@media (max-width: 600px) {
+  body {
+    font-weight: 400; /* Bumps up the thickness on mobile */
+  }
+}
