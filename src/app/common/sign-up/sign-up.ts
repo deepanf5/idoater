@@ -43,12 +43,12 @@ export class SignUp {
   protected isPasswordHidden = signal(true);
 
   protected signUpForm = form(this.model, (schema) => {
-    required(schema.userName, { message: 'UserName is required' });
-    minLength(schema.userName, 3, { message: 'User mininum 3 character' });
-    maxLength(schema.userName, 150, { message: 'User Max char 150 character' });
-    required(schema.email, { message: 'Password is required' });
-    email(schema.email, { message: 'Please Enter a Valid Email' });
-    minLength(schema.password, 8, { message: 'Password must be 8 char' });
+    required(schema.userName, { message: 'Type a username and join the fun' });
+    minLength(schema.userName, 3, { message: 'Username too short… think bigger' });
+    maxLength(schema.userName, 12, { message: 'Epic username alert! Keep it under 12' });
+    required(schema.email, { message: '' });
+    email(schema.email, { message: 'That doesn’t look like an email' });
+    minLength(schema.password, 8, { message: 'Password please… we promise it stays secret.' });
     debounce(schema.password, 300);
     validate(schema.password, ({ value }) => {
       const password = value() ? value() : '';
