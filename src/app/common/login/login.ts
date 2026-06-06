@@ -27,9 +27,9 @@ export class Login {
   protected isPasswordHidden = signal(true);
 
   protected readonly loginForm = form(this.mode, (schema) => {
-    required(schema.email, { message: 'Eamil is required' });
-    email(schema.email, { message: 'Please enter a valid Email address' });
-    required(schema.password, { message: 'Password is required' });
+    required(schema.email, { message: 'Forgot your email? We didn’t.' });
+    email(schema.email, { message: 'Email seems broken. Can you fix it?' });
+    required(schema.password, { message: 'Type your password or no magic for you' });
   });
 
   protected onSubmitForm(event: SubmitEvent) {
