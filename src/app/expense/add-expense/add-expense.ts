@@ -100,7 +100,7 @@ export class AddExpense {
         next: (res) => {
           if (res.status === 201 && res.success === true) {
             this.showSuccess();
-            this.router.navigate(['home/expenseTracker']);
+            this.router.navigate(['home/expense-tracker']);
           }
         },
         error: (err: Error) => {

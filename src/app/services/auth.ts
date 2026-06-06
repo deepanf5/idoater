@@ -1,7 +1,9 @@
+import { UpdatePassword } from './../common/update-password/update-password';
 import { Injectable, signal } from '@angular/core';
 import { supabase } from '../app.config';
-import { from, Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { AuthResponse } from '@supabase/supabase-js';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 export enum loginStatus {
   status = 'SIGNED_IN',
@@ -57,5 +59,17 @@ export class Auth {
 
   async getUser() {
     return await supabase.auth.getUser();
+  }
+
+  sentResetLink(email: string): Observable<any> {
+    const supabasePromise = supabase.auth.resetPasswordForEmail(email);
+    return from(supabasePromise);
+  }
+
+  updatePassword(password: string): Observable<any> {
+    const supabasePromise = supabase.auth.updateUser({
+      password: password,
+    });
+    return from(supabasePromise);
   }
 }

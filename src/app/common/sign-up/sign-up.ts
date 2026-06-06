@@ -49,6 +49,17 @@ export class SignUp {
     required(schema.email, { message: '' });
     email(schema.email, { message: 'That doesn’t look like an email' });
     minLength(schema.password, 8, { message: 'Password please… we promise it stays secret.' });
+    validate(schema.password, ({ value }) => {
+      const password = value();
+      if (!password) return null;
+      if (password.toString().includes(' ')) {
+        return {
+          kind: 'no_spaces',
+          message: 'Oops! Password hates empty space',
+        };
+      }
+      return null;
+    });
     debounce(schema.password, 300);
     validate(schema.password, ({ value }) => {
       const password = value() ? value() : '';

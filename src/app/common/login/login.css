@@ -31,6 +31,7 @@
 
 .signUpText {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .passwordContainer {
@@ -42,6 +43,19 @@
   right: 2rem;
   margin-top: 0.7rem;
   cursor: pointer;
+}
+
+.singUpLink {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* forgot Email container  */
+
+.email-box {
+  padding: 15rem 5rem;
 }
 
 @media screen and (min-width: 1024px) {
@@ -75,5 +89,11 @@
   }
   .button-black {
     margin-left: 1rem;
+  }
+  .singUpLink {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
 }

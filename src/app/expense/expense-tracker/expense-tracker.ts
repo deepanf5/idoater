@@ -1,6 +1,5 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { Expense } from '../../services/expense';
 import { CurrencyPipe, DatePipe, TitleCasePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';

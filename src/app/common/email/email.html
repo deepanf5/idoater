@@ -1,0 +1,28 @@
+<div class="email-box">
+  <h2 class="title">forgot your password again today ?</h2>
+  <form (submit)="onsubmit($event)">
+    <fieldset>
+      <label for="emailField">Email</label>
+      <input
+        [formField]="reseForm.email"
+        type="email"
+        placeholder="enter your Email"
+        id="emailField"
+        autocomplete="none"
+        autofill="none"
+      />
+      @if (reseForm.email().invalid() && (reseForm.email().dirty() || reseForm.email().touched())) {
+        @for (error of reseForm.email().errors(); track error.kind) {
+          <p class="error">{{ error.message }}</p>
+        }
+      }
+    </fieldset>
+    <fieldset>
+      <div class="row">
+        <button [disabled]="reseForm().invalid()" type="submit" class="button-black">
+          {{ reseForm().submitting() ? 'submitting...' : 'reset' }}
+        </button>
+      </div>
+    </fieldset>
+  </form>
+</div>

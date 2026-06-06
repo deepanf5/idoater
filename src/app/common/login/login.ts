@@ -1,18 +1,17 @@
 import { Auth } from '../../services/auth';
-import { Component, inject, signal } from '@angular/core';
-import { email, form, FormField, required, submit } from '@angular/forms/signals';
+import { Component, effect, inject, signal } from '@angular/core';
+import { email, form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { AuthResponse } from '@supabase/supabase-js';
 import { ToastrService } from 'ngx-toastr';
-import { timeout } from 'rxjs';
-
+import { Email } from '../email/email';
 enum User {
   role = 'authenticated',
 }
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink, FormField],
+  imports: [RouterLink, FormField, Email],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -25,11 +24,29 @@ export class Login {
   router = inject(Router);
   toastr = inject(ToastrService);
   protected isPasswordHidden = signal(true);
+  showForgotPassword = signal(false);
+
+  constructor() {
+    effect(() => {
+      console.log(this.showForgotPassword());
+    });
+  }
 
   protected readonly loginForm = form(this.mode, (schema) => {
-    required(schema.email, { message: 'Forgot your email? We didn’t.' });
+    required(schema.email, { message: 'Email required. No shortcuts' });
     email(schema.email, { message: 'Email seems broken. Can you fix it?' });
     required(schema.password, { message: 'Type your password or no magic for you' });
+    validate(schema.password, ({ value }) => {
+      const password = value();
+      if (!password) return null;
+      if (password.toString().includes(' ')) {
+        return {
+          kind: 'no_spaces',
+          message: 'Oops! Password hates empty space',
+        };
+      }
+      return null;
+    });
   });
 
   protected onSubmitForm(event: SubmitEvent) {
@@ -60,6 +77,10 @@ export class Login {
 
   togglePasswordVisibility() {
     this.isPasswordHidden.set(!this.isPasswordHidden());
+  }
+
+  onClickForgotPassword() {
+    this.showForgotPassword.set(true);
   }
 
   showSuccess() {

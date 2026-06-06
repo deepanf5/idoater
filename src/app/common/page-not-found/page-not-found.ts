@@ -13,6 +13,8 @@ export class PageNotFound {
   private authS = inject(Auth);
 
   goTo() {
-    this.authS.userData().sub ? this.router.navigate(['/home']) : this.router.navigate(['/signIn']);
+    this.authS.userData().sub
+      ? this.router.navigate(['/home'])
+      : this.router.navigate(['/sign-in']);
   }
 }

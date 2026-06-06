@@ -11,65 +11,77 @@
       />
     </div>
     <div class="column column-30 logInbox-two">
-      <section class="login">
-        <h2 class="title">Welcome back ! Great things done here</h2>
-        <form (submit)="onSubmitForm($event)">
-          <fieldset>
-            <label for="emailField">Email</label>
-            <input
-              [formField]="loginForm.email"
-              type="email"
-              placeholder="enter your Email"
-              id="emailField"
-              autocomplete="none"
-              autofill="none"
-            />
-            @if (
-              loginForm.email().invalid() &&
-              (loginForm.email().dirty() || loginForm.email().touched())
-            ) {
-              @for (error of loginForm.email().errors(); track error.kind) {
-                <p class="error">{{ error.message }}</p>
-              }
-            }
-          </fieldset>
-
-          <fieldset>
-            <div class="passwordContainer">
-              <label for="passwordField">Password</label>
+      @if (!showForgotPassword()) {
+        <section class="login">
+          <h2 class="title">Welcome back ! Great things done here</h2>
+          <form (submit)="onSubmitForm($event)">
+            <fieldset>
+              <label for="emailField">Email</label>
               <input
-                [formField]="loginForm.password"
-                [type]="isPasswordHidden() ? 'password' : 'text'"
-                placeholder="Enter your password"
-                id="passwordField"
+                [formField]="loginForm.email"
+                type="email"
+                placeholder="enter your Email"
+                id="emailField"
                 autocomplete="none"
                 autofill="none"
               />
-              <span type="button" class="toggle-btn" (click)="togglePasswordVisibility()">
-                {{ isPasswordHidden() ? 'Show' : 'Hide' }}
-              </span>
               @if (
-                loginForm.password().invalid() &&
-                (loginForm.password().dirty() || loginForm.password().touched())
+                loginForm.email().invalid() &&
+                (loginForm.email().dirty() || loginForm.email().touched())
               ) {
-                @for (error of loginForm.password().errors(); track error.kind) {
+                @for (error of loginForm.email().errors(); track error.kind) {
                   <p class="error">{{ error.message }}</p>
                 }
               }
-            </div>
-          </fieldset>
-          <fieldset>
-            <div class="row">
-              <button [disabled]="loginForm().invalid()" type="submit" class="button-black">
-                {{ loginForm().submitting() ? 'Signing In...' : 'Sign In' }}
-              </button>
-            </div>
-          </fieldset>
-        </form>
-        <div class="singUpLink">
-          Don't have an Account ? <a class="signUpText" [routerLink]="'/signUp'">SignUp</a>
-        </div>
-      </section>
+            </fieldset>
+
+            <fieldset>
+              <div class="passwordContainer">
+                <label for="passwordField">Password</label>
+                <input
+                  [formField]="loginForm.password"
+                  [type]="isPasswordHidden() ? 'password' : 'text'"
+                  placeholder="Enter your password"
+                  id="passwordField"
+                  autocomplete="none"
+                  autofill="none"
+                />
+                <span type="button" class="toggle-btn" (click)="togglePasswordVisibility()">
+                  {{ isPasswordHidden() ? 'Show' : 'Hide' }}
+                </span>
+                @if (
+                  loginForm.password().invalid() &&
+                  (loginForm.password().dirty() || loginForm.password().touched())
+                ) {
+                  @for (error of loginForm.password().errors(); track error.kind) {
+                    <p class="error">{{ error.message }}</p>
+                  }
+                }
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="row">
+                <button [disabled]="loginForm().invalid()" type="submit" class="button-black">
+                  {{ loginForm().submitting() ? 'Signing In...' : 'Sign In' }}
+                </button>
+              </div>
+            </fieldset>
+          </form>
+          <div class="singUpLink">
+            <p>
+              Don't have an Account ? <a class="signUpText" [routerLink]="'/sign-up'">SignUp</a>
+            </p>
+            <p>
+              forgot your password ?
+              <a class="signUpText" (click)="onClickForgotPassword()">Reset now</a>
+            </p>
+          </div>
+        </section>
+      } @else {
+        <section class="email-container">
+          <app-email [(showReset)]="showForgotPassword" />
+        </section>
+      }
     </div>
   </div>
 </section>

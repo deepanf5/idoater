@@ -13,24 +13,30 @@ import { AddExpense } from './expense/add-expense/add-expense';
 import { PageNotFound } from './common/page-not-found/page-not-found';
 import { authGuard } from './guards/auth-guard';
 import { unAuthGuard } from './guards/un-auth-guard';
+import { UpdatePassword } from './common/update-password/update-password';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signIn',
+    redirectTo: 'sign-in',
     pathMatch: 'full',
   },
   {
-    path: 'signIn',
+    path: 'sign-in',
     component: Login,
-    title: 'sigIn',
+    title: 'sig-in',
     canActivate: [unAuthGuard],
   },
   {
-    path: 'signUp',
+    path: 'sign-up',
     component: SignUp,
-    title: 'singUp',
+    title: 'sing-up',
     canActivate: [unAuthGuard],
+  },
+  {
+    path: 'update-password',
+    component: UpdatePassword,
+    title: 'updatePassword',
   },
   {
     path: 'home',
@@ -54,27 +60,27 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'createTodo',
+        path: 'create-todo',
         loadComponent: () => import('./components/todo-form/todo-form').then((c) => c.TodoForm),
         title: 'todo',
       },
       {
-        path: 'completedList',
+        path: 'completed-list',
         component: Completed,
         title: 'completed',
       },
       {
-        path: 'pendingList',
+        path: 'pending-list',
         component: PendingList,
         title: 'PendingList',
       },
       {
-        path: 'expenseTracker',
+        path: 'expense-tracker',
         component: ExpenseTracker,
         title: 'ExpenseTracker',
       },
       {
-        path: 'addExpense',
+        path: 'add-expense',
         component: AddExpense,
         title: 'addExpense',
       },
@@ -83,5 +89,6 @@ export const routes: Routes = [
   {
     path: '**',
     component: PageNotFound,
+    title: 'page not found 404',
   },
 ];

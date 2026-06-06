@@ -24,7 +24,7 @@ export class Header implements OnInit {
     this.authS.signOut().subscribe({
       next: (res) => {
         if (!res.error) {
-          this.router.navigate(['/signIn']);
+          this.router.navigate(['/sign-in']);
           this.showSuccess();
         }
       },
