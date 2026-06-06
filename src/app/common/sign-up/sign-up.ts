@@ -9,6 +9,7 @@ import {
   minLength,
   submit,
   maxLength,
+  debounce,
 } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { AuthResponse } from '@supabase/supabase-js';
@@ -40,6 +41,7 @@ export class SignUp {
   authS = inject(Auth);
   router = inject(Router);
   toastr = inject(ToastrService);
+  protected isPasswordHidden = signal(true);
 
   protected signUpForm = form(this.model, (schema) => {
     required(schema.userName, { message: 'UserName is required' });
@@ -48,9 +50,14 @@ export class SignUp {
     required(schema.email, { message: 'Password is required' });
     email(schema.email, { message: 'Please Enter a Valid Email' });
     minLength(schema.password, 8, { message: 'Password must be 8 char' });
+    debounce(schema.password, 300);
     validate(schema.password, ({ value }) => {
-      const password = value ? value.toString() : '';
-      if (!password) return null;
+      const password = value() ? value().toString() : '';
+      if (!password)
+        return {
+          kind: 'no_password',
+          message: 'Hold up! Even superheroes need a password',
+        };
 
       const pattern =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=\-\[\]{}|;:',.<>\/?_]).{8,}$/;
@@ -90,6 +97,10 @@ export class SignUp {
         },
       });
     });
+  }
+
+  togglePasswordVisibility(): void {
+    this.isPasswordHidden.set(!this.isPasswordHidden());
   }
 
   showSuccess() {

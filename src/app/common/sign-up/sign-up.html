@@ -113,23 +113,28 @@
         </fieldset>
 
         <fieldset>
-          <label for="passwordField">Password</label>
-          <input
-            [formField]="signUpForm.password"
-            type="password"
-            placeholder="Enter your password"
-            id="passwordField"
-            autocomplete="none"
-            autofill="none"
-          />
-          @if (
-            signUpForm.password().invalid() &&
-            (signUpForm.password().dirty() || signUpForm.password().touched())
-          ) {
-            @for (error of signUpForm.password().errors(); track error.kind) {
-              <p class="error">{{ error.message }}</p>
+          <div class="passwordContainer">
+            <label for="passwordField">Password</label>
+            <input
+              [formField]="signUpForm.password"
+              [type]="isPasswordHidden() ? 'password' : 'text'"
+              placeholder="Enter your password"
+              id="passwordField"
+              autocomplete="none"
+              autofill="none"
+            />
+            <span type="button" class="toggle-btn" (click)="togglePasswordVisibility()">
+              {{ isPasswordHidden() ? 'Show' : 'Hide' }}
+            </span>
+            @if (
+              signUpForm.password().invalid() &&
+              (signUpForm.password().dirty() || signUpForm.password().touched())
+            ) {
+              @for (error of signUpForm.password().errors(); track error.kind) {
+                <p class="error">{{ error.message }}</p>
+              }
             }
-          }
+          </div>
         </fieldset>
         <fieldset>
           <div class="row">
