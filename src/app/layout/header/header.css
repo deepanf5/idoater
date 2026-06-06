@@ -17,7 +17,14 @@ header {
 
 .title {
   color: #ffffff;
-  font-size: 4rem;
+  font-size: 2rem;
+}
+
+@media screen and (min-width: 102px) {
+  .title {
+    color: #ffffff;
+    font-size: 4rem;
+  }
 }
 
 .logOut {
