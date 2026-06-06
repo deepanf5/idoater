@@ -20,3 +20,7 @@ select:focus {
   font-size: 1.4rem;
   color: crimson;
 }
+
+body {
+  font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}

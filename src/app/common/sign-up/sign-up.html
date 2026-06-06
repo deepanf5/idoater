@@ -1,74 +1,7 @@
-<!-- <section class="container signup">
-  <form (submit)="onSubmitForm($event)">
-    <fieldset>
-      <label for="userNameField">UserName</label>
-      <input
-        [formField]="signUpForm.userName"
-        type="text"
-        placeholder="Enter your UserName"
-        id="userNameField"
-        autocomplete="none"
-        autofill="none"
-      />
-      @if (
-        signUpForm.userName().invalid() &&
-        (signUpForm.userName().dirty() || signUpForm.userName().touched())
-      ) {
-        @for (error of signUpForm.userName().errors(); track error.kind) {
-          <p class="error">{{ error.message }}</p>
-        }
-      }
-    </fieldset>
-    <fieldset>
-      <label for="emailField">Email</label>
-      <input
-        [formField]="signUpForm.email"
-        type="email"
-        placeholder="enter your Email"
-        id="emailField"
-        autocomplete="none"
-        autofill="none"
-      />
-      @if (
-        signUpForm.email().invalid() && (signUpForm.email().dirty() || signUpForm.email().touched())
-      ) {
-        @for (error of signUpForm.email().errors(); track error.kind) {
-          <p class="error">{{ error.message }}</p>
-        }
-      }
-    </fieldset>
-
-    <fieldset>
-      <label for="passwordField">Password</label>
-      <input
-        [formField]="signUpForm.password"
-        type="password"
-        placeholder="Enter your password"
-        id="passwordField"
-        autocomplete="none"
-        autofill="none"
-      />
-      @if (
-        signUpForm.password().invalid() &&
-        (signUpForm.password().dirty() || signUpForm.password().touched())
-      ) {
-        @for (error of signUpForm.password().errors(); track error.kind) {
-          <p class="error">{{ error.message }}</p>
-        }
-      }
-    </fieldset>
-    <fieldset>
-      <div class="row">
-        <button type="submit" class="button-black">Sign Up</button>
-      </div>
-    </fieldset>
-  </form>
-</section> -->
-
 <section class="sigin-container">
   <div class="row">
     <div class="column column-70 box-one">
-      <img class="heroImage" src="/logo.svg" alt="log of the application" />
+      <img class="heroImage" src="/logo.svg" priority alt="log of the application" />
     </div>
     <div class="column column-30 box-two">
       <h2 class="title">Redefine How You Get Things Done, iDoLater !</h2>

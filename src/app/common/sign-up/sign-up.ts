@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Auth } from './../../services/auth';
 import { Component, inject, signal } from '@angular/core';
 import {
@@ -12,7 +13,6 @@ import {
   debounce,
 } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
-import { AuthResponse } from '@supabase/supabase-js';
 import { ToastrService } from 'ngx-toastr';
 
 enum userLogin {
@@ -27,7 +27,7 @@ export interface accountFormI {
 
 @Component({
   selector: 'app-sign-up',
-  imports: [FormField, RouterLink],
+  imports: [FormField, RouterLink, NgOptimizedImage],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.css',
 })

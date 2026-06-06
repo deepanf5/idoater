@@ -28,6 +28,10 @@
   font-size: 1.5rem;
 }
 
+.signUpText {
+  font-weight: bold;
+}
+
 @media screen and (min-width: 1024px) {
   .login {
     width: 100%;

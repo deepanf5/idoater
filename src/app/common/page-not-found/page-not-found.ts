@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-page-not-found',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './page-not-found.html',
   styleUrl: './page-not-found.css',
 })
