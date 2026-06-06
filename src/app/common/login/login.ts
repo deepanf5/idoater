@@ -4,6 +4,7 @@ import { email, form, FormField, required, submit } from '@angular/forms/signals
 import { Router, RouterLink } from '@angular/router';
 import { AuthResponse } from '@supabase/supabase-js';
 import { ToastrService } from 'ngx-toastr';
+import { timeout } from 'rxjs';
 
 enum User {
   role = 'authenticated',
@@ -56,7 +57,9 @@ export class Login {
   }
 
   showSuccess() {
-    this.toastr.success('Sign In Success, Time to set things Right');
+    this.toastr.success('Sign In Success, Time to set things Right', '', {
+      timeOut: 700,
+    });
   }
   showError() {
     this.toastr.error('Sign In Falied, Please try again with more confidence');
