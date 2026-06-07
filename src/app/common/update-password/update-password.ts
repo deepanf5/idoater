@@ -88,12 +88,12 @@ export class UpdatePassword implements OnInit {
   }
 
   showSuccess() {
-    this.toastr.success('Success! The reset link is on its way', '', {
+    this.toastr.success('Password updated! Good luck typing that again', '', {
       timeOut: 700,
     });
   }
   showError() {
-    this.toastr.error('Something went wrong. Even the internet has bad days');
+    this.toastr.error('Error, that didn’t work. Shocking, right?');
   }
   error(message: string) {
     this.toastr.error(message);
