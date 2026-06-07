@@ -71,13 +71,12 @@ export class UpdatePassword implements OnInit {
     }
     submit(this.passwordForm, async () => {
       const formDate = this.passwordForm().value();
-
       this.authS.updatePassword(formDate.password).subscribe({
         next: (res) => {
-          if (res.data) {
-            this.showSuccess();
-          } else {
+          if (res.error.__isAuthError) {
             this.error(res.error?.message);
+          } else {
+            this.showSuccess();
           }
         },
         error: (err) => {
