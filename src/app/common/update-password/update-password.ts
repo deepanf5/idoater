@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { Auth } from '../../services/auth';
 import { ToastrService } from 'ngx-toastr';
+import { supabase } from '../../app.config';
 
 export interface UpdatePasswordI {
   password: string;
@@ -26,14 +27,22 @@ export class UpdatePassword implements OnInit {
   private authS = inject(Auth);
   private toastr = inject(ToastrService);
   isLinkVerified = signal(false);
+  private activeRouter = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  ngOnInit() {
-    this.authS.getUserSession().subscribe((res) => {
-      console.log(res);
-      if (res) {
-        this.isLinkVerified.set(true);
-      }
-    });
+  async ngOnInit() {
+    const code = this.activeRouter.snapshot.queryParamMap.get('code');
+
+    if (code) {
+      await supabase.auth.exchangeCodeForSession(code);
+    }
+
+    const { data } = await supabase.auth.getSession();
+
+    if (data.session) {
+    } else {
+      this.router.navigate(['/sign-in']);
+    }
   }
 
   protected readonly passwordForm = form(this.model, (schema) => {
