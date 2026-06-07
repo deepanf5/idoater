@@ -31,9 +31,10 @@ export class UpdatePassword implements OnInit {
   ngOnInit(): void {
     this.activeRoute.queryParams.subscribe((param) => {
       const token = param['access_token'];
-      if (!token) {
-        this.router.navigate(['/sign-in']);
-      }
+      console.log(token);
+      // if (!token) {
+      //   this.router.navigate(['/sign-in']);
+      // }
     });
   }
 
