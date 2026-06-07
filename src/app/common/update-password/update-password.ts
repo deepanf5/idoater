@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { email, form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { Auth } from '../../services/auth';
 import { ToastrService } from 'ngx-toastr';
+import { supabase } from '../../app.config';
 
 export interface UpdatePasswordI {
   password: string;
@@ -21,20 +22,15 @@ export class UpdatePassword implements OnInit {
     confirmpassword: '',
   });
 
-  private activeRoute = inject(ActivatedRoute);
   protected isPasswordHidden = signal(true);
   protected isConfirmHidden = signal(true);
   private authS = inject(Auth);
   private toastr = inject(ToastrService);
   private router = inject(Router);
 
-  ngOnInit(): void {
-    this.activeRoute.queryParams.subscribe((param) => {
-      const token = param['access_token'];
-      console.log(token);
-      // if (!token) {
-      //   this.router.navigate(['/sign-in']);
-      // }
+  ngOnInit() {
+    this.authS.getUserSession().subscribe((hasSession) => {
+      if (!hasSession) this.router.navigate(['/sign-in']);
     });
   }
 

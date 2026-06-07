@@ -74,4 +74,8 @@ export class Auth {
     });
     return from(supabasePromise);
   }
+
+  getUserSession(): Observable<boolean> {
+    return from(supabase.auth.getSession()).pipe(map(({ data }) => !!data.session));
+  }
 }
