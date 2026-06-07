@@ -15,10 +15,11 @@ export enum loginStatus {
 export class Auth {
   userData = signal<any>({});
   userId = signal<string>('');
-  private session$ = new BehaviorSubject<boolean>(false);
+  private isRecoveringPassword$ = new BehaviorSubject<boolean>(false);
 
   constructor() {
     supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event);
       if (event === loginStatus.status) {
         this.userData.set(session?.user.user_metadata);
         this.userId.set(session?.user.id ?? '');
@@ -77,7 +78,6 @@ export class Auth {
   }
 
   getUserSession(): Observable<boolean> {
-    supabase.auth.onAuthStateChange((evt, sesh) => this.session$.next(evt === 'PASSWORD_RECOVERY'));
-    return this.session$.asObservable();
+    return this.isRecoveringPassword$.asObservable();
   }
 }
