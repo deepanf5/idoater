@@ -9,6 +9,7 @@ export const updatePasswordGuard: CanActivateFn = (route, state) => {
     take(1),
     map((hasSession) => {
       if (hasSession) {
+        console.log('hasSeesion', hasSession);
         return true;
       } else return false;
     }),

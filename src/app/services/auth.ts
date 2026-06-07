@@ -16,7 +16,6 @@ export class Auth {
   userData = signal<any>({});
   userId = signal<string>('');
   private session$ = new BehaviorSubject<boolean>(false);
-  
 
   constructor() {
     supabase.auth.onAuthStateChange((event, session) => {
@@ -78,9 +77,7 @@ export class Auth {
   }
 
   getUserSession(): Observable<boolean> {
-    supabase.auth.onAuthStateChange((evt, sesh) =>
-      this.session$.next(evt === 'PASSWORD_RECOVERY' || !!sesh),
-    );
+    supabase.auth.onAuthStateChange((evt, sesh) => this.session$.next(evt === 'PASSWORD_RECOVERY'));
     return this.session$.asObservable();
   }
 }
