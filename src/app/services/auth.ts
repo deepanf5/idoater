@@ -1,7 +1,7 @@
 import { UpdatePassword } from './../common/update-password/update-password';
 import { Injectable, signal } from '@angular/core';
 import { supabase } from '../app.config';
-import { from, map, Observable } from 'rxjs';
+import { BehaviorSubject, from, map, Observable } from 'rxjs';
 import { AuthResponse } from '@supabase/supabase-js';
 import { toObservable } from '@angular/core/rxjs-interop';
 
@@ -15,6 +15,8 @@ export enum loginStatus {
 export class Auth {
   userData = signal<any>({});
   userId = signal<string>('');
+  private session$ = new BehaviorSubject<boolean>(false);
+  
 
   constructor() {
     supabase.auth.onAuthStateChange((event, session) => {
@@ -76,6 +78,9 @@ export class Auth {
   }
 
   getUserSession(): Observable<boolean> {
-    return from(supabase.auth.getSession()).pipe(map(({ data }) => !!data.session));
+    supabase.auth.onAuthStateChange((evt, sesh) =>
+      this.session$.next(evt === 'PASSWORD_RECOVERY' || !!sesh),
+    );
+    return this.session$.asObservable();
   }
 }

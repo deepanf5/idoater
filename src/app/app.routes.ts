@@ -14,6 +14,7 @@ import { PageNotFound } from './common/page-not-found/page-not-found';
 import { authGuard } from './guards/auth-guard';
 import { unAuthGuard } from './guards/un-auth-guard';
 import { UpdatePassword } from './common/update-password/update-password';
+import { updatePasswordGuard } from './guards/update-password-guard';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,7 @@ export const routes: Routes = [
     path: 'update-password',
     component: UpdatePassword,
     title: 'updatePassword',
+    canActivate: [updatePasswordGuard],
   },
   {
     path: 'home',

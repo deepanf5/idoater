@@ -1,9 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { email, form, FormField, required, submit, validate } from '@angular/forms/signals';
+import { form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { Auth } from '../../services/auth';
 import { ToastrService } from 'ngx-toastr';
-import { supabase } from '../../app.config';
 
 export interface UpdatePasswordI {
   password: string;
@@ -26,14 +25,8 @@ export class UpdatePassword implements OnInit {
   protected isConfirmHidden = signal(true);
   private authS = inject(Auth);
   private toastr = inject(ToastrService);
-  private router = inject(Router);
 
-  ngOnInit() {
-    this.authS.getUserSession().subscribe((hasSession) => {
-      console.log('has sesssion', hasSession);
-      // if (!hasSession) this.router.navigate(['/sign-in']);
-    });
-  }
+  ngOnInit() {}
 
   protected readonly passwordForm = form(this.model, (schema) => {
     required(schema.password, { message: 'Type your password or no magic for you' });
