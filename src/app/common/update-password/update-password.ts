@@ -32,17 +32,25 @@ export class UpdatePassword implements OnInit {
 
   async ngOnInit() {
     const code = this.activeRouter.snapshot.queryParamMap.get('code');
+    const hash = window.location.hash;
 
     if (code) {
       await supabase.auth.exchangeCodeForSession(code);
     }
 
-    const { data } = await supabase.auth.getSession();
-
-    if (data.session) {
-    } else {
-      this.router.navigate(['/sign-in']);
+    if (hash.includes('access_token')) {
+      console.log('Recovery token is in URL hash');
     }
+
+    setTimeout(async () => {
+      const { data } = await supabase.auth.getSession();
+
+      if (data.session) {
+        console.log('User can reset password');
+      } else {
+        console.log('Reset link invalid or expired');
+      }
+    }, 1000);
   }
 
   protected readonly passwordForm = form(this.model, (schema) => {
