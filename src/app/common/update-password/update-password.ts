@@ -30,7 +30,8 @@ export class UpdatePassword implements OnInit {
 
   ngOnInit() {
     this.authS.getUserSession().subscribe((hasSession) => {
-      if (!hasSession) this.router.navigate(['/sign-in']);
+      console.log('has sesssion', hasSession);
+      // if (!hasSession) this.router.navigate(['/sign-in']);
     });
   }
 
