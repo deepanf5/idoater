@@ -19,7 +19,7 @@ export class Auth {
 
   constructor() {
     supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event);
+      console.log('event', event);
       if (event === loginStatus.status) {
         this.userData.set(session?.user.user_metadata);
         this.userId.set(session?.user.id ?? '');
