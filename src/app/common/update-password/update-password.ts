@@ -25,8 +25,16 @@ export class UpdatePassword implements OnInit {
   protected isConfirmHidden = signal(true);
   private authS = inject(Auth);
   private toastr = inject(ToastrService);
+  isLinkVerified = signal(false);
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authS.getUserSession().subscribe((res) => {
+      console.log(res);
+      if (res) {
+        this.isLinkVerified.set(true);
+      }
+    });
+  }
 
   protected readonly passwordForm = form(this.model, (schema) => {
     required(schema.password, { message: 'Type your password or no magic for you' });
