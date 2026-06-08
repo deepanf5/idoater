@@ -31,13 +31,12 @@ export class Email {
       return;
     }
 
-    this.showReset.set(false);
-
     submit(this.reseForm, async () => {
       const formData = this.reseForm().value();
       this.auth.sentResetLink(formData.email).subscribe({
         next: (res) => {
           if (res.data) {
+            this.showReset.set(false);
             this.router.navigate(['/sign-in']);
             this.showSuccess();
           } else {
