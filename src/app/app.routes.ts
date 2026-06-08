@@ -38,6 +38,7 @@ export const routes: Routes = [
     path: 'update-password',
     component: UpdatePassword,
     title: 'updatePassword',
+    canActivate: [updatePasswordGuard],
   },
   {
     path: 'home',
