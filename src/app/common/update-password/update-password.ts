@@ -44,15 +44,15 @@ export class UpdatePassword implements OnInit {
         });
         if (error) {
           this.showError();
-          this.router.navigate(['/sign-in']);
+          // this.router.navigate(['/sign-in']);
         }
       } catch (err) {
         this.showError();
-        this.router.navigate(['/sign-in']);
+        // this.router.navigate(['/sign-in']);
       }
     } else {
       this.showError();
-      this.router.navigate(['/sign-in']);
+      // this.router.navigate(['/sign-in']);
     }
   }
 
