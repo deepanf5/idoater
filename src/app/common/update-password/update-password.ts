@@ -1,9 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { Auth } from '../../services/auth';
 import { ToastrService } from 'ngx-toastr';
 import { supabase } from '../../app.config';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export interface UpdatePasswordI {
   password: string;
@@ -29,28 +30,14 @@ export class UpdatePassword implements OnInit {
   isLinkVerified = signal(false);
   private activeRouter = inject(ActivatedRoute);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
-  async ngOnInit() {
-    const code = this.activeRouter.snapshot.queryParamMap.get('code');
-    const hash = window.location.hash;
-
-    if (code) {
-      await supabase.auth.exchangeCodeForSession(code);
-    }
-
-    if (hash.includes('access_token')) {
-      console.log('Recovery token is in URL hash');
-    }
-
-    setTimeout(async () => {
-      const { data } = await supabase.auth.getSession();
-
-      if (data.session) {
-        console.log('User can reset password');
-      } else {
-        console.log('Reset link invalid or expired');
+  ngOnInit() {
+    this.authS.authEvents$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((state) => {
+      if (state && (state.event === 'PASSWORD_RECOVERY' || state.session)) {
+        console.log('Recovery session established successfully.');
       }
-    }, 1000);
+    });
   }
 
   protected readonly passwordForm = form(this.model, (schema) => {

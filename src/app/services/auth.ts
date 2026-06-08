@@ -15,7 +15,7 @@ export enum loginStatus {
 export class Auth {
   userData = signal<any>({});
   userId = signal<string>('');
-  private isRecoveringPassword$ = new BehaviorSubject<boolean>(false);
+  private authState$ = new BehaviorSubject<any>(null);
 
   constructor() {
     supabase.auth.onAuthStateChange((event, session) => {
@@ -78,7 +78,7 @@ export class Auth {
     return from(supabasePromise);
   }
 
-  getUserSession(): Observable<boolean> {
-    return this.isRecoveringPassword$.asObservable();
+  get authEvents$() {
+    return this.authState$.asObservable();
   }
 }
