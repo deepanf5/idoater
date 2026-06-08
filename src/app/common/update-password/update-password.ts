@@ -106,10 +106,11 @@ export class UpdatePassword implements OnInit {
       this.authS.updatePassword(formDate.password).subscribe({
         next: (res) => {
           console.log('res', res);
-          if (res.error.__isAuthError) {
-            this.error(res.error?.message);
-          } else {
+          if (res.data) {
             this.showSuccess();
+            this.router.navigate(['/sign-in']);
+          } else {
+            this.error(res.error?.message);
           }
         },
         error: (err) => {
