@@ -31,29 +31,32 @@ export class UpdatePassword implements OnInit {
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
-  async ngOnInit() {
-    const accessToken = this.activeRouter.snapshot.queryParamMap.get('access_token');
-    const refreshToken = this.activeRouter.snapshot.queryParamMap.get('refresh_token');
-    console.log('accessToken', accessToken);
-    console.log('refresh', refreshToken);
-    if (accessToken && refreshToken) {
-      try {
-        const { data, error } = await supabase.auth.setSession({
-          access_token: accessToken,
-          refresh_token: refreshToken,
-        });
-        if (error) {
-          this.showError();
-          // this.router.navigate(['/sign-in']);
-        }
-      } catch (err) {
-        this.showError();
-        // this.router.navigate(['/sign-in']);
-      }
-    } else {
-      this.showError();
-      // this.router.navigate(['/sign-in']);
-    }
+  ngOnInit() {
+    this.activeRouter.fragment.subscribe((res) => {
+      console.log(res);
+    });
+    // const accessToken = this.activeRouter.snapshot.queryParamMap.get('access_token');
+    // const refreshToken = this.activeRouter.snapshot.queryParamMap.get('refresh_token');
+    // console.log('accessToken', accessToken);
+    // console.log('refresh', refreshToken);
+    // if (accessToken && refreshToken) {
+    //   try {
+    //     const { data, error } = await supabase.auth.setSession({
+    //       access_token: accessToken,
+    //       refresh_token: refreshToken,
+    //     });
+    //     if (error) {
+    //       this.showError();
+    //       // this.router.navigate(['/sign-in']);
+    //     }
+    //   } catch (err) {
+    //     this.showError();
+    //     // this.router.navigate(['/sign-in']);
+    //   }
+    // } else {
+    //   this.showError();
+    //   // this.router.navigate(['/sign-in']);
+    // }
   }
 
   protected readonly passwordForm = form(this.model, (schema) => {
