@@ -108,7 +108,7 @@ export class UpdatePassword implements OnInit {
           console.log('res', res);
           if (res.data) {
             this.showSuccess();
-            this.router.navigate(['/sign-in']);
+            this.router.navigate(['']);
           } else {
             this.error(res.error?.message);
           }
