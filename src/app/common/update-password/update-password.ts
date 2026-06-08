@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { form, FormField, required, submit, validate } from '@angular/forms/signals';
 import { Auth } from '../../services/auth';
@@ -27,7 +27,6 @@ export class UpdatePassword implements OnInit {
   protected isConfirmHidden = signal(true);
   private authS = inject(Auth);
   private toastr = inject(ToastrService);
-  private activeRouter = inject(ActivatedRoute);
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
@@ -108,7 +107,8 @@ export class UpdatePassword implements OnInit {
           console.log('res', res);
           if (res.data) {
             this.showSuccess();
-            this.router.navigate(['']);
+            this.authS.signOut();
+            this.router.navigate(['/sign-in']);
           } else {
             this.error(res.error?.message);
           }
