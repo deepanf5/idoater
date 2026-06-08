@@ -33,12 +33,23 @@ export class UpdatePassword implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    this.authS.authEvents$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((state) => {
-      console.log('Component received auth state:', state);
-
-      // If state exists and we have a session (regardless of the event name)
-      if (state && state.session) {
-        console.log('Session ready for password update!');
+    this.activeRouter.queryParamMap.subscribe(async (res) => {
+      const accessToken = this.activeRouter.snapshot.queryParamMap.get('access_token');
+      const refreshToken = this.activeRouter.snapshot.queryParamMap.get('refresh_token');
+      if (accessToken && refreshToken) {
+        try {
+          const { data, error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+          if (error) {
+            this.router.navigate(['/sign-in']);
+          }
+        } catch (err) {
+          this.router.navigate(['/sign-in']);
+        }
+      } else {
+        this.router.navigate(['/sign-in']);
       }
     });
   }
