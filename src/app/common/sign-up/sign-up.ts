@@ -96,7 +96,7 @@ export class SignUp {
         next: (res: any) => {
           if (res.data.user) {
             this.showSuccess();
-            this.router.navigate(['/signIn']);
+            this.router.navigate(['/sign-in']);
           } else {
             this.showError();
           }
