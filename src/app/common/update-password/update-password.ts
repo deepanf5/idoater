@@ -104,7 +104,6 @@ export class UpdatePassword implements OnInit {
       const formDate = this.passwordForm().value();
       this.authS.updatePassword(formDate.password).subscribe({
         next: (res) => {
-          console.log('res', res);
           if (res.data) {
             this.showSuccess();
             this.authS.signOut();
