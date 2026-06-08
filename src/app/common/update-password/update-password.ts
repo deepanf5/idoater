@@ -32,8 +32,9 @@ export class UpdatePassword implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   async ngOnInit() {
-    const hash = window.location.hash.substring(1); // remove #
-    const params = new URLSearchParams(hash);
+    const hash = window.location.hash; // remove #
+    const tokenPart = hash.split('#')[2];
+    const params = new URLSearchParams(tokenPart);
 
     const accessToken = params.get('access_token');
     const refreshToken = params.get('refresh_token');
