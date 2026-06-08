@@ -40,6 +40,7 @@ export class Auth {
         data: {
           userName: userName,
         },
+        emailRedirectTo: 'http://localhost:4200/#/sign-in',
       },
     });
     return from(promise);
