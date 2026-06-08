@@ -40,11 +40,7 @@ export class UpdatePassword implements OnInit {
     const refreshToken = params.get('refresh_token');
     const type = params.get('type'); // check token type
 
-    console.log('accessToken', accessToken);
-    console.log('refreshToken', refreshToken);
-    console.log('type', type);
-
-    if (accessToken && refreshToken) {
+    if (type === 'recovery' && accessToken && refreshToken) {
       try {
         const { data, error } = await supabase.auth.setSession({
           access_token: accessToken,
@@ -52,15 +48,15 @@ export class UpdatePassword implements OnInit {
         });
         if (error) {
           this.showError();
-          // this.router.navigate(['/sign-in']);
+          this.router.navigate(['/sign-in']);
         }
       } catch (err) {
         this.showError();
-        // this.router.navigate(['/sign-in']);
+        this.router.navigate(['/sign-in']);
       }
     } else {
       this.showError();
-      // this.router.navigate(['/sign-in']);
+      this.router.navigate(['/sign-in']);
     }
   }
 
@@ -109,6 +105,7 @@ export class UpdatePassword implements OnInit {
       const formDate = this.passwordForm().value();
       this.authS.updatePassword(formDate.password).subscribe({
         next: (res) => {
+          console.log('res', res);
           if (res.error.__isAuthError) {
             this.error(res.error?.message);
           } else {
