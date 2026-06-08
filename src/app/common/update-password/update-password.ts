@@ -34,8 +34,11 @@ export class UpdatePassword implements OnInit {
 
   ngOnInit() {
     this.authS.authEvents$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((state) => {
-      if (state && (state.event === 'PASSWORD_RECOVERY' || state.session)) {
-        console.log('Recovery session established successfully.');
+      console.log('Component received auth state:', state);
+
+      // If state exists and we have a session (regardless of the event name)
+      if (state && state.session) {
+        console.log('Session ready for password update!');
       }
     });
   }

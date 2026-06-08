@@ -65,9 +65,7 @@ export class Auth {
   }
 
   sentResetLink(email: string): Observable<any> {
-    const supabasePromise = supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'https://idolater.vercel.app/#/update-password',
-    });
+    const supabasePromise = supabase.auth.resetPasswordForEmail(email);
     return from(supabasePromise);
   }
 
