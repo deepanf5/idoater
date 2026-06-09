@@ -10,16 +10,17 @@ Built with Angular Signals and Signal Forms for reactive state management and fo
 
 Expense Tracking & Categorization — Easily record, organize, and categorize expenses to monitor spending patterns, manage budgets, and gain better financial insights.
 
+Email notifications are integrated using Pinogram, and the application is deployed on Vercel for fast, reliable, and scalable access.
 
 ## Features
+
 Add, edit, and delete daily tasks
 Track task completion status
 Expense tracker
 User authentication and secure data storage
 Real-time updates with Supabase
 
-
-## 
+##
 
 ## Contributing
 
