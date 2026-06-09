@@ -25,13 +25,13 @@ export const routes: Routes = [
   {
     path: 'sign-in',
     component: Login,
-    title: 'sig-in',
+    title: 'sign-in',
     canActivate: [unAuthGuard],
   },
   {
     path: 'sign-up',
     component: SignUp,
-    title: 'sing-up',
+    title: 'sign-up',
     canActivate: [unAuthGuard],
   },
   {
