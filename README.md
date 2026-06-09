@@ -20,8 +20,6 @@ Expense tracker
 User authentication and secure data storage
 Real-time updates with Supabase
 
-##
-
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for improvements and new features.
