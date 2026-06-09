@@ -40,7 +40,6 @@ export class Auth {
         data: {
           userName: userName,
         },
-        emailRedirectTo: 'https://idolater.vercel.app/#/sign-in',
       },
     });
     return from(promise);
