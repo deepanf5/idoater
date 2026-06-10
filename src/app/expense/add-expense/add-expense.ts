@@ -51,7 +51,7 @@ export class AddExpense {
     'Investments',
     'Taxes',
     'Subscriptions',
-    'other',
+    'Other',
   ]);
 
   protected model = signal<expenseI>({

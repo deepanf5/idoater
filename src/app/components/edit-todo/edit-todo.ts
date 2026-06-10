@@ -20,7 +20,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './edit-todo.css',
 })
 export class EditTodo implements OnInit {
-  protected readonly taskType: string[] = ['Low', 'High', 'Medium'];
+  protected readonly taskType: string[] = ['Low', 'Medium', 'High'];
   protected taskList = signal<string[]>(this.taskType);
   protected model = signal<DoLaterI>({
     title: '',

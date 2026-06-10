@@ -20,7 +20,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './todo-form.css',
 })
 export class TodoForm {
-  protected readonly taskType: string[] = ['Low', 'High', 'Medium'];
+  protected readonly taskType: string[] = ['Low', 'Medium', 'High'];
   protected taskList = signal<string[]>(this.taskType);
   private router = inject(Router);
   protected model = signal<DoLaterI>({
