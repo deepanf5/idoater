@@ -172,6 +172,34 @@
   width: 10%;
 }
 
+/* task status */
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.task {
+  padding: 0 2rem;
+  text-transform: capitalize;
+  letter-spacing: 0.8px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.high {
+  color: #eb3b5a;
+}
+
+.medium {
+  color: #3867d6;
+}
+
+.low {
+  color: #3ea625;
+}
+
 @media screen and (min-width: 1024px) {
   .card-container {
     width: 98%;
@@ -224,5 +252,11 @@
   }
   .noDataTaskContainer {
     flex-direction: row;
+  }
+  .card-header {
+    flex-direction: row;
+  }
+  .task {
+    text-align: left;
   }
 }

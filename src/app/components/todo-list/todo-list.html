@@ -15,7 +15,16 @@
             class="container card-one"
             [ngClass]="{ complete: todo.completed, pending: !todo.completed }"
           >
-            <h2 class="card-title">{{ todo.title }}</h2>
+            <header class="card-header">
+              <h2 class="card-title">{{ todo.title }}</h2>
+              @if (todo.task_type === 'High') {
+                <p class="high task">{{ todo.task_type }}</p>
+              } @else if (todo.task_type === 'Medium') {
+                <p class="medium task">{{ todo.task_type }}</p>
+              } @else {
+                <p class="low task">{{ todo.task_type }}</p>
+              }
+            </header>
             <p class="description">{{ todo.description }}</p>
             <div class="btn-container">
               <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
@@ -25,17 +34,26 @@
           <div class="card-two">
             @if (todo.completed) {
               <div>
-                <p>Completed</p>
                 <img
                   class="icon"
                   src="/green-checkmark-icon.svg"
                   alt="A picture of green check mark"
                 />
+                <p>Completed</p>
               </div>
             } @else {
               <div>
-                <p>Pending</p>
+                <!-- <div>
+                  @if (todo.task_type === 'High') {
+                    <p class="task-status high">{{ todo.task_type }}</p>
+                  } @else if (todo.task_type === 'Medium') {
+                    <p class="task-status medium">{{ todo.task_type }}</p>
+                  } @else {
+                    <p class="task-status low">{{ todo.task_type }}</p>
+                  }
+                </div> -->
                 <img class="icon2" src="/caution-svgrepo-com.svg" alt="A picture of clock" />
+                <p class="pending-text">Pending</p>
               </div>
             }
           </div>

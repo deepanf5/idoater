@@ -12,7 +12,16 @@
       @for (todo of todoList(); track todo) {
         <div class="card-container">
           <div class="container card-one">
-            <h2 class="card-title">{{ todo.title }}</h2>
+            <header class="card-header">
+              <h2 class="card-title">{{ todo.title }}</h2>
+              @if (todo.task_type === 'High') {
+                <p class="high task">{{ todo.task_type }}</p>
+              } @else if (todo.task_type === 'Medium') {
+                <p class="medium task">{{ todo.task_type }}</p>
+              } @else {
+                <p class="low task">{{ todo.task_type }}</p>
+              }
+            </header>
             <p class="description">{{ todo.description }}</p>
             <div class="btn-container">
               <button class="button-small btn-upadte" (click)="getId(todo.id)">Update</button>
