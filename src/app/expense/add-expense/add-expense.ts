@@ -79,7 +79,7 @@ export class AddExpense {
     min(schema.amount, 1, { message: 'Money cant appear from thin air — enter an amount' });
     max(schema.amount, 9999999, { message: 'Even the bank raises an eyebrow at that number' });
 
-    minLength(schema.description, 20, {
+    minLength(schema.description, 10, {
       message: 'Tiny description alert! Expand your thoughts',
     });
     maxLength(schema.description, 40, {
